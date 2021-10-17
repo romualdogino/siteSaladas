@@ -30,19 +30,19 @@ handler.post(
     if (!isEmail(email)) {
       res
         .status(400)
-        .json({ error: { message: 'The email you entered is invalid.' } });
+        .json({ error: { message: 'O email que você digitou é inválido.' } });
       return;
     }
     if (await findUserByEmail(req.db, email)) {
       res
         .status(403)
-        .json({ error: { message: 'The email has already been used.' } });
+        .json({ error: { message: 'O email já esta cadastrado.' } });
       return;
     }
     if (await findUserByUsername(req.db, username)) {
       res
         .status(403)
-        .json({ error: { message: 'The username has already been taken.' } });
+        .json({ error: { message: 'O nome de usuário já foi escolhido.' } });
       return;
     }
     const user = await insertUser(req.db, {

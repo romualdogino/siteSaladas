@@ -29,7 +29,7 @@ handler.post(
     const user = await findUserByEmail(req.db, email);
     if (!user) {
       res.status(400).json({
-        error: { message: 'We couldn’t find that email. Please try again.' },
+        error: { message: 'Não foi possível encontrar esse email. Por favor, tente novamente.' },
       });
       return;
     }
@@ -43,11 +43,13 @@ handler.post(
     await sendMail({
       to: email,
       from: MAIL_CONFIG.from,
-      subject: '[nextjs-mongodb-app] Reset your password.',
+      subject: 'Redefina sua senha.',
       html: `
       <div>
-        <p>Hello, ${user.name}</p>
-        <p>Please follow <a href="${process.env.WEB_URI}/forget-password/${token._id}">this link</a> to reset your password.</p>
+        <p>Olá, ${user.name}</p>
+        <p>Por favor, você solicitou a redefinição da sua senha para o acesso ao site do Edisaladas</p>
+        <p><a href="${process.env.WEB_URI}/forget-password/${token._id}">Click neste link Para redefinir Sua Senha</a> .</p>
+         <p> E agradecemos por suas escolhas </p>
       </div>
       `,
     });

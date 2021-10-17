@@ -56,6 +56,7 @@ export async function insertUser(
   { email, originalPassword, bio = '', name, profilePicture, username }
 ) {
   const user = {
+    admin: false,
     emailVerified: false,
     profilePicture,
     email,

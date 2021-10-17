@@ -52,17 +52,18 @@ const SignUp = () => {
   return (
     <Wrapper className={styles.root}>
       <div className={styles.main}>
-        <h1 className={styles.title}>Join Now</h1>
+        <img src="./images/logo1.png" alt="" />
+        <h1 className={styles.title}>Cadastro</h1>
         <form onSubmit={onSubmit}>
           <Container alignItems="center">
-            <p className={styles.subtitle}>Your login</p>
+            <p className={styles.subtitle}>seus dados de entrada</p>
             <div className={styles.seperator} />
           </Container>
           <Input
             ref={emailRef}
             htmlType="email"
             autoComplete="email"
-            placeholder="Email Address"
+            placeholder="Seu Email"
             ariaLabel="Email Address"
             size="large"
             required
@@ -72,20 +73,20 @@ const SignUp = () => {
             ref={passwordRef}
             htmlType="password"
             autoComplete="new-password"
-            placeholder="Password"
+            placeholder="Escolha Sua Senha"
             ariaLabel="Password"
             size="large"
             required
           />
           <Spacer size={0.75} axis="vertical" />
           <Container alignItems="center">
-            <p className={styles.subtitle}>About you</p>
+            <p className={styles.subtitle}>Dados Pessoais</p>
             <div className={styles.seperator} />
           </Container>
           <Input
             ref={usernameRef}
             autoComplete="username"
-            placeholder="Username"
+            placeholder="Nome de usuário"
             ariaLabel="Username"
             size="large"
             required
@@ -94,7 +95,7 @@ const SignUp = () => {
           <Input
             ref={nameRef}
             autoComplete="name"
-            placeholder="Your name"
+            placeholder="Como vc se chama?"
             ariaLabel="Your name"
             size="large"
             required
@@ -107,14 +108,14 @@ const SignUp = () => {
             size="large"
             loading={isLoading}
           >
-            Sign up
+            Fazer meu cadastro
           </Button>
         </form>
       </div>
       <div className={styles.footer}>
         <Link href="/login" passHref>
           <TextLink color="link" variant="highlight">
-            Already have an account? Log in
+            Já é cadastrado? Entrar
           </TextLink>
         </Link>
       </div>

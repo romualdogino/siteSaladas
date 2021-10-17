@@ -6,19 +6,20 @@ import Wrapper from './Wrapper';
 
 const Footer = () => {
   return (
-    <footer className={styles.footer}>
-      <Wrapper>
-        <Text color="accents-7">
-          Made with ❤️, 🔥, and a keyboard by{' '}
-          <TextLink href="https://hoangvvo.com/" color="link">
-            Hoang Vo
-          </TextLink>
-          .
-        </Text>
-        <Spacer size={1} axis="vertical" />
-        <ThemeSwitcher />
-      </Wrapper>
-    </footer>
+    <>
+      <footer className="uk-section">
+
+        <div className="uk-container">
+          <Wrapper>
+            <Text className={styles.fim}  color="accents-7">
+              Adaptado por Romualdo <span>&#169;</span> 2021
+            </Text>
+            <Spacer size={2} axis="vertical" />
+            {/* <ThemeSwitcher /> */}
+          </Wrapper>
+        </div>
+      </footer>
+    </>
   );
 };
 
