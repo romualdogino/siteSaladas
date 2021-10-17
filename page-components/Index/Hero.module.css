@@ -13,11 +13,13 @@
 }
 
 .nextjs {
-  background: linear-gradient(90deg, #7928ca, #ff0080);
+  background: linear-gradient(90deg, #008000, #14e954);
 }
 
 .mongodb {
   background: linear-gradient(90deg, rgb(110, 96, 245), rgb(131, 219, 167));
+  font-size: 38px;
+  padding: 25px;
 }
 
 .nextjs,

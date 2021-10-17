@@ -38,9 +38,9 @@ const Login = () => {
           }),
         });
         mutate({ user: response.user }, false);
-        toast.success('You have been logged in.');
+        toast.success('Você está logado.');
       } catch (e) {
-        toast.error('Incorrect email or password.');
+        toast.error('senha ou email incorretos.');
       } finally {
         setIsLoading(false);
       }
@@ -51,13 +51,14 @@ const Login = () => {
   return (
     <Wrapper className={styles.root}>
       <div className={styles.main}>
-        <h1 className={styles.title}>Login to App</h1>
+      <img src="./images/logo1.png" alt="" />
+        <h1 className={styles.title}>Entrar</h1>
         <form onSubmit={onSubmit}>
           <Input
             ref={emailRef}
             htmlType="email"
             autoComplete="email"
-            placeholder="Email Address"
+            placeholder="Seu Email"
             ariaLabel="Email Address"
             size="large"
             required
@@ -67,7 +68,7 @@ const Login = () => {
             ref={passwordRef}
             htmlType="password"
             autoComplete="current-password"
-            placeholder="Password"
+            placeholder="Sua Senha"
             ariaLabel="Password"
             size="large"
             required
@@ -80,12 +81,12 @@ const Login = () => {
             size="large"
             loading={isLoading}
           >
-            Log in
+            Entrar
           </Button>
           <Spacer size={0.25} axis="vertical" />
           <Link href="/forget-password" passHref>
             <ButtonLink type="success" size="large" variant="ghost">
-              Forget password
+              Recuparar Minha Senha
             </ButtonLink>
           </Link>
         </form>
@@ -93,7 +94,7 @@ const Login = () => {
       <div className={styles.footer}>
         <Link href="/sign-up" passHref>
           <TextLink color="link" variant="highlight">
-            Don&apos;t have an account? Sign Up
+            Não Sou Cadastrado? Cadastrar
           </TextLink>
         </Link>
       </div>

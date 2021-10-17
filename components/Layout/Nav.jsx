@@ -72,20 +72,20 @@ const UserMenu = ({ user, mutate }) => {
         {visible && (
           <div className={styles.menu}>
             <Link passHref href={`/user/${user.username}`}>
-              <a className={styles.item}>Profile</a>
+              <a className={styles.item}>Perfil</a>
             </Link>
             <Link passHref href="/settings">
-              <a className={styles.item}>Settngs</a>
+              <a className={styles.item}>Configuração</a>
             </Link>
-            <div className={styles.item} style={{ cursor: 'auto' }}>
+            {/* <div className={styles.item} style={{ cursor: 'auto' }}>
               <Container alignItems="center">
                 <span>Theme</span>
                 <Spacer size={0.5} axis="horizontal" />
                 <ThemeSwitcher />
               </Container>
-            </div>
+            </div> */}
             <button onClick={onSignOut} className={styles.item}>
-              Sign out
+              Sair
             </button>
           </div>
         )}
@@ -106,7 +106,7 @@ const Nav = () => {
           justifyContent="space-between"
         >
           <Link href="/">
-            <a className={styles.logo}>Next.js MongoDB App</a>
+            <a className={styles.logo}><img src="./images/logo2.png" alt="" width="30" height="30"/></a>
           </Link>
           <Container>
             {user ? (
@@ -122,13 +122,13 @@ const Nav = () => {
                     variant="ghost"
                     color="link"
                   >
-                    Log in
+                    Entrar
                   </ButtonLink>
                 </Link>
                 <Spacer axis="horizontal" size={0.25} />
                 <Link passHref href="/sign-up">
                   <Button size="small" type="success">
-                    Sign Up
+                    Fazer o cadastro
                   </Button>
                 </Link>
               </>

@@ -7,11 +7,20 @@ const Hero = () => {
   return (
     <Wrapper>
       <div>
+        <img src="./images/logo1.png" alt=""/>
+        <Spacer axis="vertical" size={5} />
+        <hr />
+        <Spacer axis="vertical" size={2} />
         <h1 className={styles.title}>
-          <span className={styles.nextjs}>Next.js</span>
-          <span className={styles.mongodb}>MongoDB</span>
-          <span>App</span>
+          <span className={styles.nextjs}>DELIVERY</span>
+          <span className={styles.mongodb}>para Camaragibe e regiões</span>
         </h1>
+        <Spacer axis="vertical" size={2} />
+        <hr />
+        <Container>
+          
+          nossos produtos
+        </Container>
         <Container justifyContent="center" className={styles.buttons}>
           <Container>
             <Link passHref href="/feed">
@@ -21,17 +30,17 @@ const Hero = () => {
           <Spacer axis="horizontal" size={1} />
           <Container>
             <ButtonLink
-              href="https://github.com/hoangvvo/nextjs-mongodb-app"
+              href="/sign-up"
               type="secondary"
               className={styles.button}
             >
-              GitHub
+              faça seu cadastro
             </ButtonLink>
           </Container>
         </Container>
         <p className={styles.subtitle}>
-          A Next.js and MongoDB web application, designed with simplicity for
-          learning and real-world applicability in mind.
+          entre em contato pelo
+          número : (81) 98533 0400
         </p>
       </div>
     </Wrapper>
