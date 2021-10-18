@@ -106,7 +106,7 @@ const Nav = () => {
         >
           <Link href="/">
             <a className={styles.logo}>
-              <img src="./images/logo2.png" width="30" height="30"/>
+              <img src="./images/logo2.png" width="30" height="30" />
             </a>
           </Link>
           <Container>
