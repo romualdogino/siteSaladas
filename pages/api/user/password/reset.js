@@ -29,8 +29,8 @@ handler.post(
     const user = await findUserByEmail(req.db, email);
     if (!user) {
       res.status(400).json({
-        error: { 
-          message: 'Não foi possível encontrar esse email. Por favor, tente novamente.' 
+        error: {
+          message: 'Não foi possível encontrar esse email. Por favor, tente novamente.'
         },
       });
       return;
