@@ -7,7 +7,7 @@ const Hero = () => {
   return (
     <Wrapper>
       <div>
-        <img src="./images/logo1.png" alt=""/>
+        <img src="./images/logo1.png" width="100%"/>
         <Spacer axis="vertical" size={5} />
         <hr />
         <Spacer axis="vertical" size={2} />
