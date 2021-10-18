@@ -1,6 +1,5 @@
 import { Avatar } from '@/components/Avatar';
 import { Button, ButtonLink } from '@/components/Button';
-import { ThemeSwitcher } from '@/components/ThemeSwitcher';
 import { fetcher } from '@/lib/fetch';
 import { useCurrentUser } from '@/lib/user';
 import Link from 'next/link';
@@ -106,7 +105,9 @@ const Nav = () => {
           justifyContent="space-between"
         >
           <Link href="/">
-            <a className={styles.logo}><img src="./images/logo2.png" alt="" width="30" height="30"/></a>
+            <a className={styles.logo}>
+              <img src="./images/logo2.png" width="30" height="30"/>
+            </a>
           </Link>
           <Container>
             {user ? (
