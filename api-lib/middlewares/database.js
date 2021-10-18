@@ -20,10 +20,42 @@ async function createIndexes(db) {
     db
       .collection('comments')
       .createIndexes([{ key: { createdAt: -1 } }, { key: { postId: -1 } }]),
-    db.collection('users').createIndexes([
-      { key: { email: 1 }, unique: true },
-      { key: { username: 1 }, unique: true },
-    ]),
+    db
+      .collection('users').createIndexes([
+        { key: { email: 1 }, unique: true },
+        { key: { username: 1 }, unique: true },
+      ]),
+    db
+      .collection('grupo')
+      .createIndexes([{ key: { createdAt: -1 } }, { key: { creatorId: -1 } }]),
+    db
+      .collection('fornecedor')
+      .createIndexes([{ key: { createdAt: -1 } }, { key: { creatorId: -1 } }]),
+
+    db
+      .collection('desperdicio')
+      .createIndexes([{ key: { createdAt: -1 } }, { key: { creatorId: -1 } }]),
+      db
+      .collection('item')
+      .createIndexes([{ key: { createdAt: -1 } }, { key: { creatorId: -1 } }]),
+      db
+      .collection('compra')
+      .createIndexes([{ key: { createdAt: -1 } }, { key: { creatorId: -1 } }]),
+      db
+      .collection('combo')
+      .createIndexes([{ key: { createdAt: -1 } }, { key: { creatorId: -1 } }]),
+      db
+      .collection('produto')
+      .createIndexes([{ key: { createdAt: -1 } }, { key: { creatorId: -1 } }]),
+      db
+      .collection('pedido')
+      .createIndexes([{ key: { createdAt: -1 } }, { key: { creatorId: -1 } }]),
+      db
+      .collection('status')
+      .createIndexes([{ key: { createdAt: -1 } }, { key: { creatorId: -1 } }]),
+      db
+      .collection('tipo')
+      .createIndexes([{ key: { createdAt: -1 } }, { key: { creatorId: -1 } }]),
   ]);
   indexesCreated = true;
 }
