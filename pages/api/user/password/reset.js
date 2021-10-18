@@ -30,7 +30,7 @@ handler.post(
     if (!user) {
       res.status(400).json({
         error: {
-          message: ` 'Não foi possível encontrar esse email. Por favor, tente novamente.' `
+          message: ` 'Não foi possível encontrar esse email. Por favor, tente novamente.' `,
         },
       });
       return;
