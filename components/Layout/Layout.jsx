@@ -26,9 +26,6 @@ const Layout = ({ children }) => {
           property="og:image"
           content="https://repository-images.githubusercontent.com/201392697/5d392300-eef3-11e9-8e20-53310193fbfd"
         />
-        <link rel="stylesheet" href="css/uikit.min.css" />
-        <script src="js/uikit.min.js"></script>
-        <script src="js/uikit-icons.min.js"></script>
       </Head>
       <Nav />
       <main className={styles.main}>{children}</main>
