@@ -16,7 +16,7 @@ export default function UserPostPage({ post }) {
           {post.creator.name} ({post.creator.username}): {post.content}
         </title>
       </Head>
-      <Items post={post} link="grupos"/>
+      <Items post={post} link="grupos" />
     </>
   );
 }
