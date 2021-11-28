@@ -10,6 +10,7 @@ import Container from './Container';
 import styles from './Nav.module.css';
 import Spacer from './Spacer';
 import Wrapper from './Wrapper';
+import Image from 'next/image'
 
 const UserMenu = ({ user, mutate }) => {
   const menuRef = useRef();
@@ -106,7 +107,7 @@ const Nav = () => {
         >
           <Link href="/">
             <a className={styles.logo}>
-              <img src="/images/logo2.png" width="30" height="30" />
+              <Image src="/images/logo2.png" width="30" height="30" />
             </a>
           </Link>
           <Container>
