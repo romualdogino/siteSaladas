@@ -13,7 +13,9 @@ const Input = forwardRef(function Input(
     ariaLabel,
     valueA,
     required,
-    min, max, step
+    min,
+    max,
+    step,
   },
   ref
 ) {
