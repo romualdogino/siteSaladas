@@ -21,10 +21,11 @@ const Hero = () => {
           
           nossos produtos
         </Container>
+        <hr />
         <Container justifyContent="center" className={styles.buttons}>
           <Container>
-            <Link passHref href="/feed">
-              <ButtonLink className={styles.button}>Explore Feed</ButtonLink>
+            <Link passHref href="/pedidos">
+              <ButtonLink className={styles.button}>Monte seu Pedido</ButtonLink>
             </Link>
           </Container>
           <Spacer axis="horizontal" size={1} />
@@ -34,7 +35,7 @@ const Hero = () => {
               type="secondary"
               className={styles.button}
             >
-              faça seu cadastro
+              Faça seu cadastro
             </ButtonLink>
           </Container>
         </Container>

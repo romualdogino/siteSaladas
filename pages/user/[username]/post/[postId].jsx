@@ -5,6 +5,7 @@ import nc from 'next-connect';
 import Head from 'next/head';
 
 export default function UserPostPage({ post }) {
+  // console.log(post)
   if (typeof post.createdAt !== 'string') {
     post.createdAt = new Date(post.createdAt);
   }
