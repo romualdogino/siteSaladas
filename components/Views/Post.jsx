@@ -31,6 +31,8 @@ const Post = ({ post, className }) => {
       </Link>
       <div className={styles.wrap}>
         <p className={styles.content}>{post.content}</p>
+        <p className={styles.content}>{post.nome}</p>
+        <p className={styles.content}>{post.descricao}</p>
       </div>
       <div className={styles.wrap}>
         <time dateTime={post.createdAt} className={styles.timestamp}>

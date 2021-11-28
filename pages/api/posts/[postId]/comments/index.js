@@ -13,7 +13,7 @@ handler.get(async (req, res) => {
   const post = await findPostById(req.db, req.query.postId);
 
   if (!post) {
-    return res.status(404).json({ error: { message: 'Post is not found.' } });
+    return res.status(404).json({ error: { message: 'não encontrado.' } });
   }
 
   const comments = await findComments(

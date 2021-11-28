@@ -1,5 +1,5 @@
 import { Spacer, Wrapper } from '@/components/Layout';
-import { Post as PostItem } from '@/components/Post';
+import { Post as PostItem } from '@/components/Views';
 import Commenter from './Commenter';
 import CommentList from './CommentList';
 import styles from './UserPost.module.css';

@@ -26,7 +26,7 @@ async function createIndexes(db) {
         { key: { username: 1 }, unique: true },
       ]),
     db
-      .collection('grupo')
+      .collection('grupos')
       .createIndexes([{ key: { createdAt: -1 } }, { key: { creatorId: -1 } }]),
     db
       .collection('fornecedor')
@@ -56,6 +56,9 @@ async function createIndexes(db) {
       db
       .collection('tipo')
       .createIndexes([{ key: { createdAt: -1 } }, { key: { creatorId: -1 } }]),
+      db
+      .collection('pedidosAvulsos')
+      .createIndexes([{ key: { createdAt: -1 } }, { key: { creatorId: -1 } }])
   ]);
   indexesCreated = true;
 }
@@ -72,6 +75,7 @@ export async function getMongoClient() {
 }
 
 export default async function database(req, res, next) {
+  console.log(req.db)
   if (!global.mongo.client) {
     global.mongo.client = new MongoClient(process.env.MONGODB_URI);
   }

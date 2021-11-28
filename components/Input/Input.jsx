@@ -11,7 +11,9 @@ const Input = forwardRef(function Input(
     autoComplete,
     size,
     ariaLabel,
+    valueA,
     required,
+    min, max, step
   },
   ref
 ) {
@@ -27,6 +29,10 @@ const Input = forwardRef(function Input(
           className={clsx(styles.input, size && styles[size])}
           aria-label={ariaLabel}
           required={required}
+          min={min}
+          max={max}
+          value={valueA}
+          step={step}
         />
       </label>
     </div>
