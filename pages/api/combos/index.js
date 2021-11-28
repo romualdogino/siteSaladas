@@ -38,10 +38,9 @@ handler.post(
       descricao: req.body.descricao,
       creatorId: req.user._id,
     });
-
+    
     return res.json({ post });
   }
 );
-
 
 export default handler;
