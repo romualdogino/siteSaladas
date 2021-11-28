@@ -14,7 +14,7 @@ handler.get(async (req, res) => {
     req.query.by,
     req.query.limit ? parseInt(req.query.limit, 10) : undefined
   );
-    // console.log(posts)
+  
   res.json({ posts });
 });
 handler.post(
@@ -45,6 +45,5 @@ handler.post(
     return res.json({ post });
   }
 );
-
 
 export default handler;
