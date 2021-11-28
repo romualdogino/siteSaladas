@@ -44,52 +44,18 @@ handler.post(
 );
 handler.patch(
   ...auths,
-  // validateBody({
-  //   type: 'object',
-  //   properties: {
-  //     nome: ValidateProps.grupo.nome,
-  //     descricao: ValidateProps.grupo.descricao,
-  //   },
-  //   required: ['nome'],
-  //   additionalProperties: false,
-  // }),
   async (req, res) => {
     // console.log(req.query.id)
     console.log(req.body)
     console.log('antes')
 
-
     const post = await alteraGrupo(req.db, {
       nome: req.body.nome,
       descricao: req.body.descricao,
-    },req.query.id);
-
-    return res.json({ post });
+    }, req.query.id);
     
+    return res.json({ post });
   }
 )
-// handler.patch(
-//   ...auths,
-//   validateBody({
-//     type: 'object',
-//     properties: {
-//       // nome: ValidateProps.grupo.nome,
-//       // descricao: ValidateProps.grupo.descricao,
-//     },
-//     required: ['nome'],
-//     additionalProperties: false,
-//   }),
-//   async (req, res) => {
-//         console.log("req")
-//     // const post = await alteraGrupo(req.db, {
-//     //   nome: req.body.nome,
-//     //   descricao: req.body.descricao,
-//     // });
-
-//     // return res.json({ post });
-//   }
-
-// )
-
 
 export default handler;
