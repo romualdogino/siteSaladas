@@ -22,12 +22,12 @@ handler.post(
   validateBody({
     type: 'object',
     properties: {
-      Item: ValidateProps.desperdicio.Item, 
-      qtd: ValidateProps.desperdicio.qtd, 
-      Motivo: ValidateProps.desperdicio.Motivo, 
-      obs: ValidateProps.desperdicio.obs, 
+      Item: ValidateProps.desperdicio.Item,
+      qtd: ValidateProps.desperdicio.qtd,
+      Motivo: ValidateProps.desperdicio.Motivo,
+      obs: ValidateProps.desperdicio.obs,
     },
-    required: ['qtd','Item','Motivo'],
+    required: [ 'qtd', 'Item', 'Motivo' ],
     additionalProperties: false,
   }),
   async (req, res) => {
@@ -36,19 +36,16 @@ handler.post(
     }
 
     const post = await insertDesperdicio(req.db, {
-      Item: req.body.Item, 
-      qtd: req.body.qtd, 
-      Motivo: req.body.Motivo, 
+      Item: req.body.Item,
+      qtd: req.body.qtd,
+      Motivo: req.body.Motivo,
       obs: req.body.obs,
-      
       creatorId: req.user._id,
       ativo: false,
-     
     });
-
+    
     return res.json({ post });
   }
 );
-
 
 export default handler;
