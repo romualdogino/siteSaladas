@@ -6,9 +6,7 @@ import Head from 'next/head';
 import { useMemo } from 'react';
 import { format } from '@lukeed/ms';
 
-
 export default function UserPostPage({ post }) {
-  console.log(post)
   if (typeof post.createdAt !== 'string') {
     post.createdAt = new Date(post.createdAt);
   }
@@ -20,25 +18,22 @@ export default function UserPostPage({ post }) {
 
   return (
     <>
-    
       <Head>
         <title>
           {post.nome} pedido:({timestampTxt}): {post.content}
         </title>
       </Head>
-      
       <ViewPedido  post={post} link="pedidos" />
     </>
   );
 }
 
 export async function getServerSideProps(context) {
-  // console.log(context.params)
- 
   await nc().use(database).run(context.req, context.res);
-
-  const post = await findPedidoAvulsoById(context.req.db, context.params.pedidoId);
-  // console.log(context)
+  
+  const post = await findPedidoAvulsoById(
+    context.req.db,
+    context.params.pedidoId);
   if (!post) {
     return {
       notFound: true,
