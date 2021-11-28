@@ -1,6 +1,5 @@
-import { ValidateProps } from '@/api-lib/constants';
 import { findPedidosAvulsos, insertPedidoAvulso } from '@/api-lib/db';
-import { auths, database, validateBody } from '@/api-lib/middlewares';
+import { auths, database} from '@/api-lib/middlewares';
 import { ncOpts } from '@/api-lib/nc';
 import nc from 'next-connect';
 
@@ -14,7 +13,7 @@ handler.get(async (req, res) => {
     req.query.by,
     req.query.limit ? parseInt(req.query.limit, 100) : undefined
   );
-
+  
   res.json({ posts });
 });
 handler.post(
@@ -23,7 +22,7 @@ handler.post(
     // if (!req.user) {
     //   return res.status(401).end();
     // }
-    console.log(req.body)
+    //console.log(req.body);
     const post = await insertPedidoAvulso(req.db, {
       valor: req.body.valor,
       taxaEntrega: req.body.taxaEntrega,
@@ -43,10 +42,8 @@ handler.post(
       ativo: false,
       // creatorId: req.user._id,
     });
-
     return res.json({ post });
   }
 );
-
 
 export default handler;
