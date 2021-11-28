@@ -46,7 +46,7 @@ handler.post(
       obs: req.body.obs,
       descricao: req.body.descricao,
       creatorId: req.user._id,
-      ativo: false
+      ativo: false,
     });
 
     return res.json({ post });
