@@ -4,7 +4,6 @@ import { Items } from '@/page-components/Items';
 import nc from 'next-connect';
 import Head from 'next/head';
 
-
 export default function UserPostPage({ post }) {
   // console.log(post)
   if (typeof post.createdAt !== 'string') {
@@ -12,13 +11,11 @@ export default function UserPostPage({ post }) {
   }
   return (
     <>
-    
       <Head>
         <title>
           {post.creator.name} ({post.creator.username}): {post.content}
         </title>
       </Head>
-      
       <Items post={post} link="grupos"/>
     </>
   );
