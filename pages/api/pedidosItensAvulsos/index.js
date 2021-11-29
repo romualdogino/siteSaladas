@@ -1,6 +1,6 @@
-import { 
+import {
   findPedidosItensAvulsos,
-  insertPedidoItensAvulsos 
+  insertPedidoItensAvulsos,
 } from '@/api-lib/db';
 import { auths, database } from '@/api-lib/middlewares';
 import { ncOpts } from '@/api-lib/nc';
@@ -17,14 +17,15 @@ handler.get(async (req, res) => {
   );
   res.json({ posts });
 });
+
 handler.post(
   ...auths,
   async (req, res) => {
     if (!req.user) {
       return res.status(401).end();
-    }
+    };
     const post = await insertPedidoItensAvulsos(
-      req.db, 
+      req.db,
       {
         nome: req.body.nome,
         ref: req.body.ref,
@@ -32,6 +33,7 @@ handler.post(
         creatorId: req.user._id,
       }
     );
+
     return res.json({ post });
   }
 );
