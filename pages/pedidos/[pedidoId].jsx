@@ -32,8 +32,8 @@ export async function getServerSideProps(context) {
   await nc().use(database).run(context.req, context.res);
   const post = await findPedidoAvulsoById(
     context.req.db,
-    context.params.pedidoId);
-  
+    context.params.pedidoId
+  );
   if (!post) {
     return {
       notFound: true,
