@@ -27,7 +27,7 @@ handler.post(
       Motivo: ValidateProps.desperdicio.Motivo,
       obs: ValidateProps.desperdicio.obs,
     },
-    required: ['qtd','Item','Motivo'],
+    required: ['qtd', 'Item', 'Motivo'],
     additionalProperties: false,
   }),
   async (req, res) => {
@@ -43,7 +43,6 @@ handler.post(
       creatorId: req.user._id,
       ativo: false,
     });
-    
     return res.json({ post });
   }
 );
