@@ -26,8 +26,7 @@ handler.post(
       descricao: ValidateProps.status.descricao,
       tipoStatus: ValidateProps.status.tipoStatus,
     },
-    required: ['nome'],
-    required: ['tipoStatus'],
+    required: {['nome'],['tipoStatus']},
     additionalProperties: false,
   }),
   async (req, res) => {
