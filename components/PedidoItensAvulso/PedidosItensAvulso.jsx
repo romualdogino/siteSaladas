@@ -1,10 +1,7 @@
 import clsx from 'clsx';
-import { useMemo } from 'react';
 import styles from './Post.module.css';
-import toast from 'react-hot-toast';
 
-const PedidoItensAvulso = ({ post, className, Key }) => {
-
+const PedidoItensAvulso = ({ post, className }) => {
   return (
     <div className={clsx(styles.root, className)}>
       <p>
@@ -14,7 +11,7 @@ const PedidoItensAvulso = ({ post, className, Key }) => {
         {post.add}
       </p>
     </div>
-  )
-}
+  );
+};
 
 export default PedidoItensAvulso;
