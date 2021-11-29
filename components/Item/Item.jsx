@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import { useMemo } from 'react';
 import styles from './Post.module.css';
 
 const Item = ({ post, className }) => {
