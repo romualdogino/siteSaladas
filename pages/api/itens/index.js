@@ -47,7 +47,7 @@ handler.post(
       soja: ValidateProps.item.soja,
       mar: ValidateProps.item.mar,
       amendoa: ValidateProps.item.amendoa,
-      obs: ValidateProps.item.obs
+      obs: ValidateProps.item.obs,
     },
     required: ['nome'],
     required: ['grupoID'],
@@ -56,7 +56,7 @@ handler.post(
   async (req, res) => {
     if (!req.user) {
       return res.status(401).end();
-    } 
+    }
 
     const post = await insertItem(req.db, {
       nome: req.body.nome,
@@ -85,12 +85,11 @@ handler.post(
       obs: req.body.obs,
       creatorId: req.user._id,
       ativo: false,
-      comprar: true
+      comprar: true,
     });
 
     return res.json({ post });
   }
 );
-
 
 export default handler;
