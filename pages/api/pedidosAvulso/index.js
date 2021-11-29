@@ -13,13 +13,10 @@ handler.get(async (req, res) => {
     req.query.by,
     req.query.limit ? parseInt(req.query.limit, 100) : undefined
   );
-  
   res.json({ posts });
 });
 handler.post(
-  
   ...auths,
-  
   async (req, res) => {
     const post = await insertPedidoAvulso(req.db, {
       valor: req.body.valor,
@@ -40,7 +37,6 @@ handler.post(
       ativo: false,
       //creatorId: req.user._id,
     });
-    
     return res.json({ post });
   }
 );
