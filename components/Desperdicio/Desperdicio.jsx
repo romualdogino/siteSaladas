@@ -2,7 +2,6 @@ import clsx from 'clsx';
 import styles from './Post.module.css';
 
 const Desperdicios = ({ post, className }) => {
-  
   return (
     <div className={clsx(styles.root, className)}>
       <div className={styles.wrap}>
