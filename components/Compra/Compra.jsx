@@ -1,9 +1,7 @@
 import clsx from 'clsx';
-import { useMemo } from 'react';
 import styles from './Post.module.css';
 
 const Compra = ({ post, className }) => {
-  
   return (
     <div className={clsx(styles.root, className)}>
       <div className={styles.wrap}>
