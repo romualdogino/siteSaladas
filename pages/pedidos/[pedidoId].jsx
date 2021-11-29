@@ -23,17 +23,17 @@ export default function UserPostPage({ post }) {
           {post.nome} pedido:({timestampTxt}): {post.content}
         </title>
       </Head>
-      <ViewPedido  post={post} link="pedidos" />
+      <ViewPedido post={post} link="pedidos" />
     </>
   );
 }
 
 export async function getServerSideProps(context) {
   await nc().use(database).run(context.req, context.res);
-  
   const post = await findPedidoAvulsoById(
     context.req.db,
     context.params.pedidoId);
+  
   if (!post) {
     return {
       notFound: true,
