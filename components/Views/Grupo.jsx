@@ -10,40 +10,35 @@ import { Button } from '@/components/Button';
 import toast from 'react-hot-toast';
 import { fetcher } from '@/lib/fetch';
 import Router from 'next/router';
-import { UserPostPage } from 'pages/admin/grupos/[grupoId]';
 
 const Grupo = ({ post, className }) => {
   const nomeTipo = useRef();
   const descricaoTipo = useRef();
-  const [isLoading, setIsLoading] = useState(false);
   const onSubmit = useCallback(
     async e => {
-      e.preventDefault()
-      { console.log(post._id) }
-      // setIsLoading(true);
+      e.preventDefault();
       try {
-        // setIsLoading(true);
-        await fetcher(`/api/grupos?id=${post._id}`, {
-          method: 'PATCH',
-          crossDomain: true,
-          xhrFields: {
-            withCredentials: true,
-          },
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            '_method': 'PATCH',
-            'Authorization': '',
-          },
-          body: JSON.stringify({
-            nome: nomeTipo.current.value,
-            descricao: descricaoTipo.current.value,
-          }),
-        })
-          .then(req => {
+        await fetcher(`/api/grupos?id=${post._id}`, 
+                      {method: 'PATCH',
+                       crossDomain: true,
+                       xhrFields: {
+                         withCredentials: true,
+                       },
+                       headers: {
+                         Accept: 'application/json',
+                         'Content-Type': 'application/json',
+                         '_method': 'PATCH',
+                         'Authorization': '',
+                       },
+                       body: JSON.stringify({
+                         nome: nomeTipo.current.value,
+                         descricao: descricaoTipo.current.value,
+                       }),
+                      })
+          .then(req =>{
             Router.reload(window.location.pathname);
           })
-          .catch(err => console.error(err));
+          .catch(err => console.error(err););
         toast.success('sucesso ao add um novo grupo');
         nomeTipo.current.value = '';
         descricaoTipo.current.value = '';
