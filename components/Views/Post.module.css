@@ -62,3 +62,22 @@
   margin: 0;
   color: var(--accents-5);
 }
+
+.sides {
+  margin: 0;
+  display: flex;
+}
+
+.left {
+  float: left;
+  text-align: right;
+  width: 24%;
+  overflow: hidden;
+}
+
+.right {
+  float: left;
+  text-align: left;
+  width: 74%;
+  overflow: hidden;
+}

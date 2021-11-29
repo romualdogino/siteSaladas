@@ -9,7 +9,8 @@ export const ViewPedido = ({ post, link }) => {
     <Wrapper>
       <Link href={`/${link}`}>Pedidos</Link>
       <Spacer size={2} axis="vertical" />
-      {/* <PostPedido post={post} /> */}
+
+      <PostPedido post={post} />
     </Wrapper>
   );
 };
