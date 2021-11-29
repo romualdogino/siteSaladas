@@ -9,21 +9,19 @@ import { Input } from '@/components/Input';
 import { Button } from '@/components/Button';
 import toast from 'react-hot-toast';
 import { fetcher } from '@/lib/fetch';
-import Router from 'next/router'
+import Router from 'next/router';
 
 const TipoStatus = ({ post, className }) => {
   const nomeGrupo = useRef();
   const descricaoGrupo = useRef();
   // const { mutate } = UserPostPage();
   const [isLoading, setIsLoading] = useState(false);
-  const onSubmit = useCallback(
-    async e => {
-      e.preventDefault();
-      { console.log(post._id) }
-      // setIsLoading(true);
-      try {
-        // setIsLoading(true);
-        await fetcher(`/api/grupos?id=${post._id}`, {
+  const onSubmit = useCallback(async e => {
+    e.preventDefault();
+    { console.log(post._id) }
+    try {
+      await fetcher(`/api/grupos?id=${post._id}`,
+        {
           method: 'PATCH',
           crossDomain: true,
           xhrFields: {
@@ -39,23 +37,23 @@ const TipoStatus = ({ post, className }) => {
             nome: nomeGrupo.current.value,
             descricao: descricaoGrupo.current.value,
           }),
+        }
+      )
+        .then(req => {
+          Router.reload(window.location.pathname);
         })
-          .then(req => {
-            Router.reload(window.location.pathname);
-          })
-          .catch(err => console.error(err));
-        toast.success('sucesso ao add um novo grupo');
-        nomeGrupo.current.value = '';
-        descricaoGrupo.current.value = '';
-        // refresh post lists
-      } catch (error) {
-        toast.error(error.message);
-      } finally {
-        // setIsLoading(false);
-        console.log("OK")
-      }
+        .catch(err => console.error(err));
+      toast.success('sucesso ao add um novo grupo');
+      nomeGrupo.current.value = '';
+      descricaoGrupo.current.value = '';
+      // refresh post lists
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      // setIsLoading(false);
+      console.log("OK")
     }
-  )
+  })
 
   const timestampTxt = useMemo(() => {
     const diff = Date.now() - new Date(post.createdAt).getTime();
@@ -89,8 +87,16 @@ const TipoStatus = ({ post, className }) => {
         </time>
       </div>
       <form onSubmit={onSubmit}>
-        <Input label="nome" type="text" ref={nomeGrupo} placeholder={post.nome} />
-        <Input label="descrição" type="text" ref={descricaoGrupo} placeholder={post.descricao} />
+        <Input
+          label="nome"
+          type="text"
+          ref={nomeGrupo}
+          placeholder={post.nome} />
+        <Input
+          label="descrição"
+          type="text"
+          ref={descricaoGrupo}
+          placeholder={post.descricao} />
         <Button type="success" loading={isLoading}>
           Alterar
         </Button>
