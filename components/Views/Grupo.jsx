@@ -9,18 +9,13 @@ import { Input } from '@/components/Input';
 import { Button } from '@/components/Button';
 import toast from 'react-hot-toast';
 import { fetcher } from '@/lib/fetch';
-import Router from 'next/router'
+import Router from 'next/router';
 import { UserPostPage } from 'pages/admin/grupos/[grupoId]';
 
-
 const Grupo = ({ post, className }) => {
-  const nomeTipo = useRef()
-  const descricaoTipo = useRef()
-
-  // const { mutate } = UserPostPage();
-
+  const nomeTipo = useRef();
+  const descricaoTipo = useRef();
   const [isLoading, setIsLoading] = useState(false);
-
   const onSubmit = useCallback(
     async e => {
       e.preventDefault()
@@ -32,13 +27,13 @@ const Grupo = ({ post, className }) => {
           method: 'PATCH',
           crossDomain: true,
           xhrFields: {
-            withCredentials: true
+            withCredentials: true,
           },
           headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
             '_method': 'PATCH',
-            'Authorization': ''
+            'Authorization': '',
           },
           body: JSON.stringify({
             nome: nomeTipo.current.value,
@@ -46,24 +41,22 @@ const Grupo = ({ post, className }) => {
           }),
         })
           .then(req => {
-            Router.reload(window.location.pathname)
+            Router.reload(window.location.pathname);
           })
           .catch(err => console.error(err));
         toast.success('sucesso ao add um novo grupo');
         nomeTipo.current.value = '';
         descricaoTipo.current.value = '';
         // refresh post lists
-
       } catch (error) {
-        toast.error(error.message)
+        toast.error(error.message);
       } finally {
         // setIsLoading(false);
-        console.log("OK")
+        console.log("OK");
       }
     }
-  )
-
-
+  );
+  
   const timestampTxt = useMemo(() => {
     const diff = Date.now() - new Date(post.createdAt).getTime();
     if (diff < 1 * 60 * 1000) return 'Just now';
@@ -71,10 +64,8 @@ const Grupo = ({ post, className }) => {
   }, [post.createdAt]);
   return (
     <div className={clsx(styles.root, className)}>
-
       <Link href={`/user/${post.creator.username}`}>
         <a>
-
           <Container className={styles.creator}>
             <Avatar
               size={36}
@@ -104,7 +95,6 @@ const Grupo = ({ post, className }) => {
           Alterar
         </Button>
       </form>
-
     </div>
   );
 };
