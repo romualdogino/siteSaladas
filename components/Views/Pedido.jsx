@@ -1,8 +1,9 @@
+import { useRef } from 'react'
 
 const Pedido = ({ post, className }) => {
   const nomeTipo = useRef();
   const descricaoTipo = useRef();
-  // const { mutate } = UserPostPage();
+  //const { mutate } = UserPostPage();
   const [isLoading, setIsLoading] = useState(false);
   const onSubmit = useCallback(
     async e => {
@@ -84,7 +85,7 @@ const Pedido = ({ post, className }) => {
       </form>
     </div>
     );
-  };
+    };
   
-  export default Pedido;
+export default Pedido;
   
