@@ -18,9 +18,9 @@ handler.get(async (req, res) => {
   res.json({ posts });
 });
 handler.post(
-  
+
   ...auths,
-  
+
   validateBody({
     type: 'object',
     properties: {
@@ -49,7 +49,7 @@ handler.post(
       amendoa: ValidateProps.item.amendoa,
       obs: ValidateProps.item.obs,
     },
-    required: {['nome'],['grupoID']},
+    required: ['nome'],
     additionalProperties: false,
   }),
   async (req, res) => {
