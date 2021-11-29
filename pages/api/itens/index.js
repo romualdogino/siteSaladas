@@ -18,7 +18,9 @@ handler.get(async (req, res) => {
   res.json({ posts });
 });
 handler.post(
+  
   ...auths,
+  
   validateBody({
     type: 'object',
     properties: {
@@ -29,10 +31,8 @@ handler.post(
       // qtdEstoque: ValidateProps.item.qtdEstoque,
       // qtdMinimo: ValidateProps.item.qtdMinimo,
       // qtdPedido: ValidateProps.item.qtdPedido,
-
       // valorUnidade: ValidateProps.item.valorUnidade,
       validadeDia: ValidateProps.item.validadeDia,
-
       valorEnergitico: ValidateProps.item.valorEnergitico,
       carboidrato: ValidateProps.item.carboidrato,
       proteina: ValidateProps.item.proteina,
@@ -49,8 +49,7 @@ handler.post(
       amendoa: ValidateProps.item.amendoa,
       obs: ValidateProps.item.obs,
     },
-    required: ['nome'],
-    required: ['grupoID'],
+    required: {['nome'],['grupoID']},
     additionalProperties: false,
   }),
   async (req, res) => {
