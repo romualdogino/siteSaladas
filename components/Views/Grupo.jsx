@@ -18,27 +18,28 @@ const Grupo = ({ post, className }) => {
     async e => {
       e.preventDefault();
       try {
-        await fetcher(`/api/grupos?id=${post._id}`, 
-                      {method: 'PATCH',
-                       crossDomain: true,
-                       xhrFields: {
-                         withCredentials: true,
-                       },
-                       headers: {
-                         Accept: 'application/json',
-                         'Content-Type': 'application/json',
-                         '_method': 'PATCH',
-                         'Authorization': '',
-                       },
-                       body: JSON.stringify({
-                         nome: nomeTipo.current.value,
-                         descricao: descricaoTipo.current.value,
-                       }),
-                      })
-          .then(req =>{
+        await fetcher(`/api/grupos?id=${post._id}`,
+          {
+            method: 'PATCH',
+            crossDomain: true,
+            xhrFields: {
+              withCredentials: true,
+            },
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+              '_method': 'PATCH',
+              'Authorization': '',
+            },
+            body: JSON.stringify({
+              nome: nomeTipo.current.value,
+              descricao: descricaoTipo.current.value,
+            }),
+          })
+          .then(req => {
             Router.reload(window.location.pathname);
           })
-          .catch(err => console.error(err););
+          .catch(err => console.error(err));
         toast.success('sucesso ao add um novo grupo');
         nomeTipo.current.value = '';
         descricaoTipo.current.value = '';
@@ -51,7 +52,7 @@ const Grupo = ({ post, className }) => {
       }
     }
   );
-  
+
   const timestampTxt = useMemo(() => {
     const diff = Date.now() - new Date(post.createdAt).getTime();
     if (diff < 1 * 60 * 1000) return 'Just now';
