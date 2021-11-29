@@ -1,47 +1,51 @@
-import { useRef } from 'react'
+import { fetcher } from '@/lib/fetch';
+import { format } from '@lukeed/ms';
+import { useCallback, useMemo, useRef, useState } from 'react';
+import toast from 'react-hot-toast';
+import { Button } from '../Button/Button';
+import Input from '../Input/Input';
+import styles from './Post.module.css';
 
 const Pedido = ({ post, className }) => {
   const nomeTipo = useRef();
   const descricaoTipo = useRef();
-  //const { mutate } = UserPostPage();
   const [isLoading, setIsLoading] = useState(false);
   const onSubmit = useCallback(
     async e => {
       e.preventDefault();
-      { console.log(post._id) }
-      // setIsLoading(true);
       try {
-        // setIsLoading(true);
-        await fetcher(`/api/grupos?id=${post._id}`, {
-          method: 'PATCH',
-          crossDomain: true,
-          xhrFields: {
-            withCredentials: true,
-          },
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            '_method': 'PATCH',
-            'Authorization': '',
-          },
-          body: JSON.stringify({
-            nome: nomeTipo.current.value,
-            descricao: descricaoTipo.current.value,
-          }),
-        })
+        await fetcher(`/api/grupos?id=${post._id}`,
+          {
+            method: 'PATCH',
+            crossDomain: true,
+            xhrFields: {
+              withCredentials: true,
+            },
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+              '_method': 'PATCH',
+              'Authorization': '',
+            },
+            body: JSON.stringify({
+              nome: nomeTipo.current.value,
+              descricao: descricaoTipo.current.value,
+            }),
+          }
+        )
           .then(req => {
-          Router.reload(window.location.pathname);
-        })
+            Router.reload(window.location.pathname);
+          })
           .catch(err => console.error(err));
         toast.success('sucesso ao add um novo grupo');
         nomeTipo.current.value = '';
         descricaoTipo.current.value = '';
-        // refresh post lists
+        //refresh post lists
       } catch (error) {
         toast.error(error.message);
       } finally {
-        // setIsLoading(false);
-        console.log("OK")
+        //setIsLoading(false);
+        console.log("OK");
       }
     }
   )
@@ -84,8 +88,8 @@ const Pedido = ({ post, className }) => {
         </Button>
       </form>
     </div>
-    );
-    };
-  
+  );
+};
+
 export default Pedido;
-  
+
