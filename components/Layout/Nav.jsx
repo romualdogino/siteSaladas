@@ -10,7 +10,7 @@ import Container from './Container';
 import styles from './Nav.module.css';
 import Spacer from './Spacer';
 import Wrapper from './Wrapper';
-import Image from 'next/image'
+import Image from 'next/image';
 
 const UserMenu = ({ user, mutate }) => {
   const menuRef = useRef();
