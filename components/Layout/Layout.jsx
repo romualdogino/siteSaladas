@@ -14,9 +14,7 @@ const Layout = ({ children }) => {
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
         <meta name="description" content="entraga de comida em camaragibe" />
-        <meta
-          property="og:title"
-          content="Edisaladas"/>
+        <meta property="og:title" content="Edisaladas" />
         <meta property="og:description" content="Edisalas, alimentação saudável" />
       </Head>
       <Nav />
