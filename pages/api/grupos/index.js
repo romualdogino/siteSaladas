@@ -45,15 +45,10 @@ handler.post(
 handler.patch(
   ...auths,
   async (req, res) => {
-    // console.log(req.query.id)
-    console.log(req.body)
-    console.log('antes')
-
     const post = await alteraGrupo(req.db, {
       nome: req.body.nome,
       descricao: req.body.descricao,
     }, req.query.id);
-    
     return res.json({ post });
   }
 )
