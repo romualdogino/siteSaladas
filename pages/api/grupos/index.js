@@ -43,12 +43,16 @@ handler.post(
   }
 );
 handler.patch(
+  
   ...auths,
+  
   async (req, res) => {
-    const post = await alteraGrupo(req.db, {
-      nome: req.body.nome,
-      descricao: req.body.descricao,
-    }, req.query.id);
+    const post = await alteraGrupo(
+      req.db, {
+        nome: req.body.nome,
+        descricao: req.body.descricao,
+      }, 
+      req.query.id);
     return res.json({ post });
   }
 )
