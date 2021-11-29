@@ -11,18 +11,14 @@ import toast from 'react-hot-toast';
 import { fetcher } from '@/lib/fetch';
 import Router from 'next/router'
 
-
 const TipoStatus = ({ post, className }) => {
-  const nomeGrupo = useRef()
-  const descricaoGrupo = useRef()
-
+  const nomeGrupo = useRef();
+  const descricaoGrupo = useRef();
   // const { mutate } = UserPostPage();
-
   const [isLoading, setIsLoading] = useState(false);
-
   const onSubmit = useCallback(
     async e => {
-      e.preventDefault()
+      e.preventDefault();
       { console.log(post._id) }
       // setIsLoading(true);
       try {
@@ -31,13 +27,13 @@ const TipoStatus = ({ post, className }) => {
           method: 'PATCH',
           crossDomain: true,
           xhrFields: {
-            withCredentials: true
+            withCredentials: true,
           },
           headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
             '_method': 'PATCH',
-            'Authorization': ''
+            'Authorization': '',
           },
           body: JSON.stringify({
             nome: nomeGrupo.current.value,
@@ -45,23 +41,21 @@ const TipoStatus = ({ post, className }) => {
           }),
         })
           .then(req => {
-            Router.reload(window.location.pathname)
+            Router.reload(window.location.pathname);
           })
           .catch(err => console.error(err));
         toast.success('sucesso ao add um novo grupo');
         nomeGrupo.current.value = '';
         descricaoGrupo.current.value = '';
         // refresh post lists
-
       } catch (error) {
-        toast.error(error.message)
+        toast.error(error.message);
       } finally {
         // setIsLoading(false);
         console.log("OK")
       }
     }
   )
-
 
   const timestampTxt = useMemo(() => {
     const diff = Date.now() - new Date(post.createdAt).getTime();
@@ -70,10 +64,8 @@ const TipoStatus = ({ post, className }) => {
   }, [post.createdAt]);
   return (
     <div className={clsx(styles.root, className)}>
-
       <Link href={`/user/${post.creator.username}`}>
         <a>
-
           <Container className={styles.creator}>
             <Avatar
               size={36}
@@ -93,7 +85,7 @@ const TipoStatus = ({ post, className }) => {
       </div>
       <div className={styles.wrap}>
         <time dateTime={post.createdAt} className={styles.timestamp}>
-          {timestampTxt} -  {post.createdAt}
+          {timestampTxt} - {post.createdAt}
         </time>
       </div>
       <form onSubmit={onSubmit}>
@@ -103,9 +95,8 @@ const TipoStatus = ({ post, className }) => {
           Alterar
         </Button>
       </form>
-
     </div>
   );
 };
 
-export default Grupo;
+export default TipoStatus;
