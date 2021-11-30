@@ -6,7 +6,7 @@ import { useCallback, useRef, useState } from 'react';
 import { fetcher } from '@/lib/fetch';
 import toast from 'react-hot-toast';
 
-import { useItemPages } from '@/lib/item';
+import { useItemPages } from '@/lib/Item';
 import { useStatusMotivoPages } from '@/lib/status';
 
 const PostDesperdicio = ({ user }) => {

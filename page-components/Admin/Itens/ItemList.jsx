@@ -3,7 +3,7 @@ import { Container, Spacer } from '@/components/Layout';
 import Wrapper from '@/components/Layout/Wrapper';
 import { Text } from '@/components/Text';
 import { Item } from '@/components/Item';
-import { useItemPages } from '@/lib/item';
+import { useItemPages } from '@/lib/Item';
 import Link from 'next/link';
 import styles from './admin.module.css';
 

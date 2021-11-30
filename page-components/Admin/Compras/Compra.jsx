@@ -5,7 +5,7 @@ import { useCurrentUser } from '@/lib/user';
 import { useCallback, useRef, useState } from 'react';
 import { fetcher } from '@/lib/fetch';
 import toast from 'react-hot-toast';
-import { useItemPages, useItemSelect } from '@/lib/item';
+import { useItemPages, useItemSelect } from '@/lib/Item';
 import { useFornecedorPages, useFornecedorSelect } from '@/lib/fornecedor';
 import styles from './admin.module.css';
 const PostCompra = ({ user }) => {
