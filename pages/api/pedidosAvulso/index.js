@@ -16,33 +16,27 @@ handler.get(async (req, res) => {
   res.json({ posts });
 });
 
-handler.post(
-  ...auths,
-  async (req, res) => {
-    const post = await insertPedidoAvulso(
-      req.db,
-      {
-        valor: req.body.valor,
-        taxaEntrega: req.body.taxaEntrega,
-        nome: req.body.nome,
-        fone: req.body.fone,
-        endereco: req.body.endereco,
-        ref: req.body.ref,
-        obs: req.body.obs,
-        formaPagamento: req.body.formaPagamento,
-        folhas: req.body.folhas,
-        ingredientes: req.body.ingredientes,
-        frutas: req.body.frutas,
-        proteinas: req.body.proteinas,
-        fibras: req.body.fibras,
-        molhos: req.body.molhos,
-        extras: req.body.extras,
-        ativo: false,
-        //creatorId: req.user._id,
-      }
-    );
-    return res.json({ post });
-  }
-);
+handler.post(...auths, async (req, res) => {
+  const post = await insertPedidoAvulso(req.db, {
+    valor: req.body.valor,
+    taxaEntrega: req.body.taxaEntrega,
+    nome: req.body.nome,
+    fone: req.body.fone,
+    endereco: req.body.endereco,
+    ref: req.body.ref,
+    obs: req.body.obs,
+    formaPagamento: req.body.formaPagamento,
+    folhas: req.body.folhas,
+    ingredientes: req.body.ingredientes,
+    frutas: req.body.frutas,
+    proteinas: req.body.proteinas,
+    fibras: req.body.fibras,
+    molhos: req.body.molhos,
+    extras: req.body.extras,
+    ativo: false,
+    //creatorId: req.user._id,
+  });
+  return res.json({ post });
+});
 
 export default handler;

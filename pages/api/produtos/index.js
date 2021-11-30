@@ -17,6 +17,7 @@ handler.get(async (req, res) => {
 
   res.json({ posts });
 });
+
 handler.post(
   ...auths,
   validateBody({
@@ -56,38 +57,35 @@ handler.post(
     if (!req.user) {
       return res.status(401).end();
     }
-    const post = await insertProduto(
-      req.db,
-      {
-        nome: req.body.nome,
-        grupoID: req.body.GrupoID,
-        pesoPorcao: req.body.pesoPorcao,
-        pesoRendimento: req.body.pesoRendimento,
-        qtdEstoque: req.body.qtdEstoque,
-        qtdMinimo: req.body.qtdMinimo,
-        qtdPedido: req.body.qtdPedido,
-        valorUnidade: req.body.valorUnidade,
-        validadeDia: req.body.validadeDia,
-        valorEnergitico: req.body.valorEnergitico,
-        carboidrato: req.body.carboidrato,
-        proteina: req.body.proteina,
-        gorduraSaturada: req.body.gorduraSaturada,
-        gorduraTotal: req.body.gorduraTotal,
-        fibraAlimentar: req.body.fibraAlimentar,
-        sodio: req.body.sodio,
-        gluten: req.body.gluten,
-        conservante: req.body.conservante,
-        lactose: req.body.lactose,
-        ovo: req.body.ovo,
-        soja: req.body.soja,
-        mar: req.body.mar,
-        amendoa: req.body.amendoa,
-        obs: req.body.obs,
-        creatorId: req.user._id,
-        ativo: false,
-        comprar: true,
-      }
-    );
+    const post = await insertProduto(req.db, {
+      nome: req.body.nome,
+      grupoID: req.body.GrupoID,
+      pesoPorcao: req.body.pesoPorcao,
+      pesoRendimento: req.body.pesoRendimento,
+      qtdEstoque: req.body.qtdEstoque,
+      qtdMinimo: req.body.qtdMinimo,
+      qtdPedido: req.body.qtdPedido,
+      valorUnidade: req.body.valorUnidade,
+      validadeDia: req.body.validadeDia,
+      valorEnergitico: req.body.valorEnergitico,
+      carboidrato: req.body.carboidrato,
+      proteina: req.body.proteina,
+      gorduraSaturada: req.body.gorduraSaturada,
+      gorduraTotal: req.body.gorduraTotal,
+      fibraAlimentar: req.body.fibraAlimentar,
+      sodio: req.body.sodio,
+      gluten: req.body.gluten,
+      conservante: req.body.conservante,
+      lactose: req.body.lactose,
+      ovo: req.body.ovo,
+      soja: req.body.soja,
+      mar: req.body.mar,
+      amendoa: req.body.amendoa,
+      obs: req.body.obs,
+      creatorId: req.user._id,
+      ativo: false,
+      comprar: true,
+    });
 
     return res.json({ post });
   }

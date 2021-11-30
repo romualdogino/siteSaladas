@@ -14,7 +14,7 @@ handler.get(async (req, res) => {
     req.query.by,
     req.query.limit ? parseInt(req.query.limit, 10) : undefined
   );
-  
+
   res.json({ posts });
 });
 handler.post(
@@ -26,8 +26,7 @@ handler.post(
       descricao: ValidateProps.status.descricao,
       tipoStatus: ValidateProps.status.tipoStatus,
     },
-    required: ['nome'],
-    required: ['tipoStatus'],
+    required: ['nome', 'tipoStatus'],
     additionalProperties: false,
   }),
   async (req, res) => {

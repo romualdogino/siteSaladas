@@ -15,7 +15,7 @@ export default function UserPostPage({ post }) {
     if (diff < 1 * 60 * 1000) return 'agora';
     return `${format(diff, true)} atrás`;
   }, [post.createdAt]);
-  
+
   return (
     <>
       <Head>

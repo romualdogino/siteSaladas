@@ -14,44 +14,42 @@ import Router from 'next/router';
 const Grupo = ({ post, className }) => {
   const nomeTipo = useRef();
   const descricaoTipo = useRef();
-  const onSubmit = useCallback(
-    async e => {
-      e.preventDefault();
-      try {
-        await fetcher(`/api/grupos?id=${post._id}`,
-          {
-            method: 'PATCH',
-            crossDomain: true,
-            xhrFields: {
-              withCredentials: true,
-            },
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
-              '_method': 'PATCH',
-              'Authorization': '',
-            },
-            body: JSON.stringify({
-              nome: nomeTipo.current.value,
-              descricao: descricaoTipo.current.value,
-            }),
-          })
-          .then(req => {
-            Router.reload(window.location.pathname);
-          })
-          .catch(err => console.error(err));
-        toast.success('sucesso ao add um novo grupo');
-        nomeTipo.current.value = '';
-        descricaoTipo.current.value = '';
-        // refresh post lists
-      } catch (error) {
-        toast.error(error.message);
-      } finally {
-        // setIsLoading(false);
-        console.log("OK");
-      }
+  const [isLoading, setIsLoading] = useState(false);
+  const onSubmit = useCallback(async (e) => {
+    e.preventDefault();
+    try {
+      await fetcher(`/api/grupos?id=${post._id}`, {
+        method: 'PATCH',
+        crossDomain: true,
+        xhrFields: {
+          withCredentials: true,
+        },
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          _method: 'PATCH',
+          Authorization: '',
+        },
+        body: JSON.stringify({
+          nome: nomeTipo.current.value,
+          descricao: descricaoTipo.current.value,
+        }),
+      })
+        .then((req) => {
+          console.log(req);
+          Router.reload(window.location.pathname);
+        })
+        .catch((err) => console.error(err));
+      toast.success('sucesso ao add um novo grupo');
+      nomeTipo.current.value = '';
+      descricaoTipo.current.value = '';
+      // refresh post lists
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setIsLoading(false);
     }
-  );
+  });
 
   const timestampTxt = useMemo(() => {
     const diff = Date.now() - new Date(post.createdAt).getTime();
@@ -81,12 +79,22 @@ const Grupo = ({ post, className }) => {
       </div>
       <div className={styles.wrap}>
         <time dateTime={post.createdAt} className={styles.timestamp}>
-          {timestampTxt} -  {post.createdAt}
+          {timestampTxt} - {post.createdAt}
         </time>
       </div>
       <form onSubmit={onSubmit}>
-        <Input label="nome" type="text" ref={nomeTipo} placeholder={post.nome} />
-        <Input label="descrição" type="text" ref={descricaoTipo} placeholder={post.descricao} />
+        <Input
+          label="nome"
+          type="text"
+          ref={nomeTipo}
+          placeholder={post.nome}
+        />
+        <Input
+          label="descrição"
+          type="text"
+          ref={descricaoTipo}
+          placeholder={post.descricao}
+        />
         <Button type="success" loading={isLoading}>
           Alterar
         </Button>

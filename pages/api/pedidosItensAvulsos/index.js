@@ -18,24 +18,18 @@ handler.get(async (req, res) => {
   res.json({ posts });
 });
 
-handler.post(
-  ...auths,
-  async (req, res) => {
-    if (!req.user) {
-      return res.status(401).end();
-    };
-    const post = await insertPedidoItensAvulsos(
-      req.db,
-      {
-        nome: req.body.nome,
-        ref: req.body.ref,
-        add: req.body.add,
-        creatorId: req.user._id,
-      }
-    );
-
-    return res.json({ post });
+handler.post(...auths, async (req, res) => {
+  if (!req.user) {
+    return res.status(401).end();
   }
-);
+  const post = await insertPedidoItensAvulsos(req.db, {
+    nome: req.body.nome,
+    ref: req.body.ref,
+    add: req.body.add,
+    creatorId: req.user._id,
+  });
+
+  return res.json({ post });
+});
 
 export default handler;

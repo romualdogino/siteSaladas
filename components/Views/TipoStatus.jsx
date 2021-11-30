@@ -16,33 +16,31 @@ const TipoStatus = ({ post, className }) => {
   const descricaoGrupo = useRef();
   // const { mutate } = UserPostPage();
   const [isLoading, setIsLoading] = useState(false);
-  const onSubmit = useCallback(async e => {
+  const onSubmit = useCallback(async (e) => {
     e.preventDefault();
-    { console.log(post._id) }
     try {
-      await fetcher(`/api/grupos?id=${post._id}`,
-        {
-          method: 'PATCH',
-          crossDomain: true,
-          xhrFields: {
-            withCredentials: true,
-          },
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            '_method': 'PATCH',
-            'Authorization': '',
-          },
-          body: JSON.stringify({
-            nome: nomeGrupo.current.value,
-            descricao: descricaoGrupo.current.value,
-          }),
-        }
-      )
-        .then(req => {
+      await fetcher(`/api/grupos?id=${post._id}`, {
+        method: 'PATCH',
+        crossDomain: true,
+        xhrFields: {
+          withCredentials: true,
+        },
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          _method: 'PATCH',
+          Authorization: '',
+        },
+        body: JSON.stringify({
+          nome: nomeGrupo.current.value,
+          descricao: descricaoGrupo.current.value,
+        }),
+      })
+        .then((req) => {
           Router.reload(window.location.pathname);
+          console.log(req);
         })
-        .catch(err => console.error(err));
+        .catch((err) => console.error(err));
       toast.success('sucesso ao add um novo grupo');
       nomeGrupo.current.value = '';
       descricaoGrupo.current.value = '';
@@ -50,10 +48,9 @@ const TipoStatus = ({ post, className }) => {
     } catch (error) {
       toast.error(error.message);
     } finally {
-      // setIsLoading(false);
-      console.log("OK")
+      setIsLoading(false);
     }
-  })
+  });
 
   const timestampTxt = useMemo(() => {
     const diff = Date.now() - new Date(post.createdAt).getTime();
@@ -91,12 +88,14 @@ const TipoStatus = ({ post, className }) => {
           label="nome"
           type="text"
           ref={nomeGrupo}
-          placeholder={post.nome} />
+          placeholder={post.nome}
+        />
         <Input
           label="descrição"
           type="text"
           ref={descricaoGrupo}
-          placeholder={post.descricao} />
+          placeholder={post.descricao}
+        />
         <Button type="success" loading={isLoading}>
           Alterar
         </Button>

@@ -42,19 +42,17 @@ handler.post(
     return res.json({ post });
   }
 );
-handler.patch(
-  ...auths,
-  async (req, res) => {
-    const post = await alteraGrupo(
-      req.db,
-      {
-        nome: req.body.nome,
-        descricao: req.body.descricao,
-      },
-      req.query.id);
+handler.patch(...auths, async (req, res) => {
+  const post = await alteraGrupo(
+    req.db,
+    {
+      nome: req.body.nome,
+      descricao: req.body.descricao,
+    },
+    req.query.id
+  );
 
-    return res.json({ post });
-  }
-);
+  return res.json({ post });
+});
 
 export default handler;
