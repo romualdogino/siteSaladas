@@ -3,7 +3,7 @@ export * from './token';
 export * from './user';
 export * from './grupo';
 export * from './fornecedor';
-export * from './tipostatus';
+export * from './tipoStatus';
 export * from './status';
 export * from './item';
 export * from './compra';
