@@ -34,31 +34,25 @@ export async function getServerSideProps(context) {
     context.req.db,
     context.params.pedidoId
   )
-    .then(post => {
-      console.log(post); if (post.pedidosAvulsos2) {
-        return post = post.pedidosAvulsos2
-      } else { return post }
+    .then((post) => {
+      if (post.pedidosAvulsos2) {
+        return post = post.pedidosAvulsos2;
+      } else {
+        return post;
+      }
     })
-    .catch(err => console.log(err))
+    .catch((err) => console.log(err))
   if (!post) {
     return {
       notFound: true,
     };
   }
-  // console.log(typeof (post.creator._id))
-  console.log({ 'teste': post })
   post._id = String(post._id);
-  post.creatorId ? post.creatorId = String(post.creatorId) : ""
-  // typeof (post.creator._id) != Object ? "" : post.creator._id = String(post.creator._id)
+  post.creatorId ? post.creatorId = String(post.creatorId) : "";
   if (post.creator) {
-     post.creator._id = String(post.creator._id)
-  } else {
-   
+    post.creator._id = String(post.creator._id);
   }
-  post.creator
   post.createdAt = post.createdAt.toJSON();
-
-    console.log({'e':post})
 
   return { props: { post } };
 }

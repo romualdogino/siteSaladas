@@ -58,21 +58,24 @@ const Pedido = ({ post, className }) => {
   }, [post.createdAt]);
   return (
     <div className={clsx(styles.root, className)}>
-      {post.creator ? <Link href={`/user/${post.creator.username}`}>
-        <a>
-          <Container className={styles.creator}>
-            <Avatar
-              size={36}
-              url={post.creator.profilePicture}
-              username={post.creator.username}
-            />
-            <Container column className={styles.meta}>
-              <p className={styles.name}>{post.creator.name}</p>
-              <p className={styles.username}>{post.creator.username}</p>
+      {post.creator ?
+        <Link href={`/user/${post.creator.username}`}>
+          <a>
+            <Container className={styles.creator}>
+              <Avatar
+                size={36}
+                url={post.creator.profilePicture}
+                username={post.creator.username}
+              />
+              <Container column className={styles.meta}>
+                <p className={styles.name}>{post.creator.name}</p>
+                <p className={styles.username}>{post.creator.username}</p>
+              </Container>
             </Container>
-          </Container>
-        </a>
-      </Link> : ""}
+          </a>
+        </Link>
+        :
+        ""}
 
       <div className={styles.wrap}>
         <p className={styles.content}>
