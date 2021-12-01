@@ -3,12 +3,12 @@ import { Container, Spacer } from '@/components/Layout';
 import Wrapper from '@/components/Layout/Wrapper';
 import { Text } from '@/components/Text';
 import { Pedido } from '@/components/Pedido';
-import { usePedidoPages } from '@/lib/pedido';
+import { usePedidosAvulsoPages } from '@/lib/pedidosAvulso';
 import Link from 'next/link';
 import styles from './admin.module.css';
 
 const PedidoList = () => {
-  const { data, size, setSize, isLoadingMore, isReachingEnd } = usePedidoPages();
+  const { data, size, setSize, isLoadingMore, isReachingEnd } = usePedidosAvulsoPages();
   const posts = data
     ? data.reduce((acc, val) => [...acc, ...val.posts], [])
     : [];
@@ -20,7 +20,7 @@ const PedidoList = () => {
           
           <Link
             key={post._id}
-            href={`/adm/pedido/${post._id}`}
+            href={`/pedidos/${post._id}`}
             passHref
           >
             <div className={styles.wrap}>
@@ -38,7 +38,7 @@ const PedidoList = () => {
               loading={isLoadingMore}
               onClick={() => setSize(size + 1)}
             >
-              Load more
+              mais
             </Button>
           )}
         </Container>

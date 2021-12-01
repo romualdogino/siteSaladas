@@ -15,7 +15,7 @@ import Textarea from '@/components/Input/Textarea';
 export const Pedidos = () => {
     const pedido = {
         taxaEntrega: 0,
-        valor: 0,
+        valor: 13.00,
         folhas: [],
         ingredientes: [],
         frutas: [],
@@ -158,6 +158,18 @@ export const Pedidos = () => {
         async (e) => {
             setIsLoading(true);
             e.preventDefault();
+            const meuPedido = spedido
+
+            meuPedido = {
+                ...spedido,
+                nome: nomePedido.current.value,
+                fone: telefonePedido.current.value,
+                endereco: enderecoPedido.current.value,
+                ref: refPedido.current.value,
+                obs: obsPedido.current.value,
+                formaPagamento: formaPagamentoPedido.current.value
+            }
+            console.log(meuPedido)
             setSpedido(spedido => ({
                 ...spedido,
                 nome: nomePedido.current.value,
@@ -169,12 +181,10 @@ export const Pedidos = () => {
             }))
             setTimeout(async () => {
                 try {
-                    console.log(spedido)
-
                     await fetcher('/api/pedidosAvulso', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(spedido),
+                        body: JSON.stringify(meuPedido),
                     });
                     toast.success('sucesso ao solicitar seu pedido');
                     // nomeGru.current.value = '';
@@ -203,331 +213,358 @@ export const Pedidos = () => {
     const [temPedido, setTemPedido] = useState(false)
     return (
         <Wrapper>
-            
             Folhas
-            {spedido.folhas.map((e, index) => {
-                // {console.log(index)}
-                return (
-                    <button onClick={() => { apaga("folhas", index) }}>{e.nome}</button>
-                )
-            })}
-            {dados.folhas.map((e) => {
-                if (testefolha < 2) {
-                    if (spedido.folhas[0]) {
-                        if (spedido.folhas[0].nome == e.nome) {
-                            return
+            {
+                spedido.folhas.map((e, index) => {
+                    // {console.log(index)}
+                    return (
+                        <button onClick={() => { apaga("folhas", index) }}>{e.nome}</button>
+                    )
+                })
+            }
+            {
+                dados.folhas.map((e) => {
+                    if (testefolha < 2) {
+                        if (spedido.folhas[0]) {
+                            if (spedido.folhas[0].nome == e.nome) {
+                                return
+                            }
                         }
-                    }
-                    if (spedido.folhas[1]) {
-                        if (spedido.folhas[1].nome == e.nome) {
-                            return
+                        if (spedido.folhas[1]) {
+                            if (spedido.folhas[1].nome == e.nome) {
+                                return
+                            }
                         }
-                    }
-                    return (<><p onClick={(v) => { v.preventDefault(), vai('folhas', e) }}>
-                        <ItemPedido post={e} className={styles.wrapper} /></p></>)
-                } else {
-                    if (spedido.folhas[0]) {
-                        if (spedido.folhas[0].nome == e.nome) {
-                            return
+                        return (<><p onClick={(v) => { v.preventDefault(), vai('folhas', e) }}>
+                            <ItemPedido post={e} className={styles.wrapper} /></p></>)
+                    } else {
+                        if (spedido.folhas[0]) {
+                            if (spedido.folhas[0].nome == e.nome) {
+                                return
+                            }
                         }
-                    }
-                    if (spedido.folhas[1]) {
-                        if (spedido.folhas[1].nome == e.nome) {
-                            return
+                        if (spedido.folhas[1]) {
+                            if (spedido.folhas[1].nome == e.nome) {
+                                return
+                            }
                         }
+                        return (<><p><ItemPedido post={e} className={styles.wrapper} /></p></>)
                     }
-                    return (<><p><ItemPedido post={e} className={styles.wrapper} /></p></>)
-                }
-            })}
+                })
+            }
             Ingredientes
-            {spedido.ingredientes.map((e, index) => {
-                return (
-                    <button onClick={() => { apaga("ingredientes", index) }}>{e.nome}</button>
-                )
-            })}
-            {dados.ingredientes.map((e) => {
-                if (testeingredientes < 4) {
-                    if (spedido.ingredientes[0]) {
-                        if (spedido.ingredientes[0].nome == e.nome) {
-                            return
-                        }
-                    }
-                    if (spedido.ingredientes[1]) {
-                        if (spedido.ingredientes[1].nome == e.nome) {
-                            return
-                        }
-                    }
-                    if (spedido.ingredientes[2]) {
-                        if (spedido.ingredientes[2].nome == e.nome) {
-                            return
-                        }
-                    }
-                    if (spedido.ingredientes[3]) {
-                        if (spedido.ingredientes[3].nome == e.nome) {
-                            return
-                        }
-                    }
+            {
+                spedido.ingredientes.map((e, index) => {
                     return (
-                        <>
-                            <p onClick={(v) => { v.preventDefault(), vai('ingredientes', e) }}>
-                                <ItemPedido post={e} className={styles.wrapper} />
-                            </p>
-                        </>
+                        <button onClick={() => { apaga("ingredientes", index) }}>{e.nome}</button>
                     )
-                } else {
-                    if (spedido.ingredientes[0]) {
-                        if (spedido.ingredientes[0].nome == e.nome) {
-                            return
+                })
+            }
+            {
+                dados.ingredientes.map((e) => {
+                    if (testeingredientes < 4) {
+                        if (spedido.ingredientes[0]) {
+                            if (spedido.ingredientes[0].nome == e.nome) {
+                                return
+                            }
                         }
-                    }
-                    if (spedido.ingredientes[1]) {
-                        if (spedido.ingredientes[1].nome == e.nome) {
-                            return
+                        if (spedido.ingredientes[1]) {
+                            if (spedido.ingredientes[1].nome == e.nome) {
+                                return
+                            }
                         }
-                    }
-                    if (spedido.ingredientes[2]) {
-                        if (spedido.ingredientes[2].nome == e.nome) {
-                            return
+                        if (spedido.ingredientes[2]) {
+                            if (spedido.ingredientes[2].nome == e.nome) {
+                                return
+                            }
                         }
-                    }
-                    if (spedido.ingredientes[3]) {
-                        if (spedido.ingredientes[3].nome == e.nome) {
-                            return
+                        if (spedido.ingredientes[3]) {
+                            if (spedido.ingredientes[3].nome == e.nome) {
+                                return
+                            }
                         }
+                        return (
+                            <>
+                                <p onClick={(v) => { v.preventDefault(), vai('ingredientes', e) }}>
+                                    <ItemPedido post={e} className={styles.wrapper} />
+                                </p>
+                            </>
+                        )
+                    } else {
+                        if (spedido.ingredientes[0]) {
+                            if (spedido.ingredientes[0].nome == e.nome) {
+                                return
+                            }
+                        }
+                        if (spedido.ingredientes[1]) {
+                            if (spedido.ingredientes[1].nome == e.nome) {
+                                return
+                            }
+                        }
+                        if (spedido.ingredientes[2]) {
+                            if (spedido.ingredientes[2].nome == e.nome) {
+                                return
+                            }
+                        }
+                        if (spedido.ingredientes[3]) {
+                            if (spedido.ingredientes[3].nome == e.nome) {
+                                return
+                            }
+                        }
+                        return (<><p><ItemPedido post={e} className={styles.wrapper} /></p></>)
                     }
-                    return (<><p><ItemPedido post={e} className={styles.wrapper} /></p></>)
-                }
-            })}
+                })
+            }
             frutas
-            {spedido.frutas.map((e, index) => {
-                return (
-                    <button onClick={() => { apaga("frutas", index) }}>{e.nome}</button>
-                )
-            })}
-            {dados.frutas.map((e) => {
-                if (testefrutas < 1) {
-                    if (spedido.frutas[0]) {
-                        if (spedido.frutas[0].nome == e.nome) {
-                            return
-                        }
-                    }
+            {
+                spedido.frutas.map((e, index) => {
                     return (
-                        <>
-                            <p onClick={(v) => { v.preventDefault(), vai('frutas', e) }}>
-                                <ItemPedido post={e} className={styles.wrapper} />
-                            </p>
-                        </>
+                        <button onClick={() => { apaga("frutas", index) }}>{e.nome}</button>
                     )
-                } else {
-                    if (spedido.frutas[0]) {
-                        if (spedido.frutas[0].nome == e.nome) {
-                            return
+                })
+            }
+            {
+                dados.frutas.map((e) => {
+                    if (testefrutas < 1) {
+                        if (spedido.frutas[0]) {
+                            if (spedido.frutas[0].nome == e.nome) {
+                                return
+                            }
                         }
+                        return (
+                            <>
+                                <p onClick={(v) => { v.preventDefault(), vai('frutas', e) }}>
+                                    <ItemPedido post={e} className={styles.wrapper} />
+                                </p>
+                            </>
+                        )
+                    } else {
+                        if (spedido.frutas[0]) {
+                            if (spedido.frutas[0].nome == e.nome) {
+                                return
+                            }
+                        }
+                        return (<><p><ItemPedido post={e} className={styles.wrapper} /></p></>)
                     }
-                    return (<><p><ItemPedido post={e} className={styles.wrapper} /></p></>)
-                }
-            })}
+                })
+            }
             Proteínas
-            {spedido.proteinas.map((e, index) => {
-                return (
-                    <button onClick={() => { apaga("proteinas", index) }}>{e.nome}</button>
-                )
-            })}
-            {dados.proteinas.map((e) => {
-                if (testeproteinas < 2) {
-                    if (spedido.proteinas[0]) {
-                        if (spedido.proteinas[0].nome == e.nome) {
-                            return
-                        }
-                    }
-                    if (spedido.proteinas[1]) {
-                        if (spedido.proteinas[1].nome == e.nome) {
-                            return
-                        }
-                    }
+            {
+                spedido.proteinas.map((e, index) => {
                     return (
-                        <>
-                            <p onClick={(v) => { v.preventDefault(), vai('proteinas', e) }}>
-                                <ItemPedido post={e} className={styles.wrapper} />
-                            </p>
-                        </>
+                        <button onClick={() => { apaga("proteinas", index) }}>{e.nome}</button>
                     )
-                } else {
-                    if (spedido.proteinas[0]) {
-                        if (spedido.proteinas[0].nome == e.nome) {
-                            return
+                })
+            }
+            {
+                dados.proteinas.map((e) => {
+                    if (testeproteinas < 2) {
+                        if (spedido.proteinas[0]) {
+                            if (spedido.proteinas[0].nome == e.nome) {
+                                return
+                            }
                         }
-                    }
-                    if (spedido.proteinas[1]) {
-                        if (spedido.proteinas[1].nome == e.nome) {
-                            return
+                        if (spedido.proteinas[1]) {
+                            if (spedido.proteinas[1].nome == e.nome) {
+                                return
+                            }
                         }
+                        return (
+                            <>
+                                <p onClick={(v) => { v.preventDefault(), vai('proteinas', e) }}>
+                                    <ItemPedido post={e} className={styles.wrapper} />
+                                </p>
+                            </>
+                        )
+                    } else {
+                        if (spedido.proteinas[0]) {
+                            if (spedido.proteinas[0].nome == e.nome) {
+                                return
+                            }
+                        }
+                        if (spedido.proteinas[1]) {
+                            if (spedido.proteinas[1].nome == e.nome) {
+                                return
+                            }
+                        }
+                        return (<><p><ItemPedido post={e} className={styles.wrapper} /></p></>)
                     }
-                    return (<><p><ItemPedido post={e} className={styles.wrapper} /></p></>)
-                }
-            })}
+                })
+            }
             Fibras
-            {spedido.fibras.map((e, index) => {
-                return (
-                    <button onClick={() => { apaga("fibras", index) }}>{e.nome}</button>
-                )
-            })}
-            {dados.fibras.map((e) => {
-                if (testefibras < 2) {
-                    if (spedido.fibras[0]) {
-                        if (spedido.fibras[0].nome == e.nome) {
-                            return
-                        }
-                    } if (spedido.fibras[1]) {
-                        if (spedido.fibras[1].nome == e.nome) {
-                            return
-                        }
-                    }
+            {
+                spedido.fibras.map((e, index) => {
                     return (
-                        <>
-                            <p onClick={(v) => { v.preventDefault(), vai('fibras', e) }}>
-                                <ItemPedido post={e} className={styles.wrapper} />
-                            </p>
-                        </>
+                        <button onClick={() => { apaga("fibras", index) }}>{e.nome}</button>
                     )
-                } else {
-                    if (spedido.fibras[0]) {
-                        if (spedido.fibras[0].nome == e.nome) {
-                            return
+                })
+            }
+            {
+                dados.fibras.map((e) => {
+                    if (testefibras < 2) {
+                        if (spedido.fibras[0]) {
+                            if (spedido.fibras[0].nome == e.nome) {
+                                return
+                            }
+                        } if (spedido.fibras[1]) {
+                            if (spedido.fibras[1].nome == e.nome) {
+                                return
+                            }
                         }
-                    } if (spedido.fibras[1]) {
-                        if (spedido.fibras[1].nome == e.nome) {
-                            return
+                        return (
+                            <>
+                                <p onClick={(v) => { v.preventDefault(), vai('fibras', e) }}>
+                                    <ItemPedido post={e} className={styles.wrapper} />
+                                </p>
+                            </>
+                        )
+                    } else {
+                        if (spedido.fibras[0]) {
+                            if (spedido.fibras[0].nome == e.nome) {
+                                return
+                            }
+                        } if (spedido.fibras[1]) {
+                            if (spedido.fibras[1].nome == e.nome) {
+                                return
+                            }
                         }
+                        return (<><p><ItemPedido post={e} className={styles.wrapper} /></p></>)
                     }
-                    return (<><p><ItemPedido post={e} className={styles.wrapper} /></p></>)
-                }
-            })}
+                })
+            }
             Molhos
-            {spedido.molhos.map((e, index) => {
-                // console.log(e)
-                return (
-                    <button onClick={() => { apaga("molhos", index, e.add) }} >{e.nome}</button>
-                )
-            })}
-            {dados.molhos.map((e) => {
-                // console.log(e)
-                if (testemolhos < 1) {
-                    // if (spedido.molhos[0]) {
-                    //     if (spedido.molhos[0].nome == e.nome) {
-                    //         return
-                    //     }
-                    // }
+            {
+                spedido.molhos.map((e, index) => {
+                    // console.log(e)
                     return (
-                        <>
-                            <p onClick={(v) => { v.preventDefault(), vai('molhos', e) }}>
-                                <ItemPedido post={e} className={styles.wrapper} />
-                            </p>
-                        </>
+                        <button onClick={() => { apaga("molhos", index, e.add) }} >{e.nome}</button>
                     )
-                } else {
+                })
+            }
+            {
+                dados.molhos.map((e) => {
+                    // console.log(e)
+                    if (testemolhos < 1) {
+                        // if (spedido.molhos[0]) {
+                        //     if (spedido.molhos[0].nome == e.nome) {
+                        //         return
+                        //     }
+                        // }
+                        return (
+                            <>
+                                <p onClick={(v) => { v.preventDefault(), vai('molhos', e) }}>
+                                    <ItemPedido post={e} className={styles.wrapper} />
+                                </p>
+                            </>
+                        )
+                    } else {
 
-                    return (<>
+                        return (<>
 
-                        <p onClick={(v) => { v.preventDefault(), vai('molhos', e, e.add) }}>
-                            <ItemPedido post={e} className={styles.wrapper} valor={true} />
-                        </p>
-                    </>)
-                }
-            })}
-            Extras
-            {spedido.extras.map((e, index) => {
-                return (
-                    <button onClick={() => { apaga("extras", index, e.add) }}>{e.nome}</button>
-                )
-            })}
-            {dados.extras.map((e) => {
-                if (testextras < 8) {
-                    if (spedido.extras[0]) {
-                        if (spedido.extras[0].nome == e.nome) {
-                            return
-                        }
-                    } if (spedido.extras[1]) {
-                        if (spedido.extras[1].nome == e.nome) {
-                            return
-                        }
-                    } if (spedido.extras[2]) {
-                        if (spedido.extras[2].nome == e.nome) {
-                            return
-                        }
-                    } if (spedido.extras[3]) {
-                        if (spedido.extras[3].nome == e.nome) {
-                            return
-                        }
-                    } if (spedido.extras[4]) {
-                        if (spedido.extras[4].nome == e.nome) {
-                            return
-                        }
-                    } if (spedido.extras[5]) {
-                        if (spedido.extras[5].nome == e.nome) {
-                            return
-                        }
-                    } if (spedido.extras[6]) {
-                        if (spedido.extras[6].nome == e.nome) {
-                            return
-                        }
-                    } if (spedido.extras[7]) {
-                        if (spedido.extras[7].nome == e.nome) {
-                            return
-                        }
-                    } if (spedido.extras[8]) {
-                        if (spedido.extras[8].nome == e.nome) {
-                            return
-                        }
-                    }
-                    return (
-                        <>
-                            <p onClick={(v) => { v.preventDefault(), vai('extras', e, e.add) }}>
+                            <p onClick={(v) => { v.preventDefault(), vai('molhos', e, e.add) }}>
                                 <ItemPedido post={e} className={styles.wrapper} valor={true} />
                             </p>
-                        </>
-                    )
-                } else {
-                    if (spedido.extras[0]) {
-                        if (spedido.extras[0].nome == e.nome) {
-                            return
-                        }
-                    } if (spedido.extras[1]) {
-                        if (spedido.extras[1].nome == e.nome) {
-                            return
-                        }
-                    } if (spedido.extras[2]) {
-                        if (spedido.extras[2].nome == e.nome) {
-                            return
-                        }
-                    } if (spedido.extras[3]) {
-                        if (spedido.extras[3].nome == e.nome) {
-                            return
-                        }
-                    } if (spedido.extras[4]) {
-                        if (spedido.extras[4].nome == e.nome) {
-                            return
-                        }
-                    } if (spedido.extras[5]) {
-                        if (spedido.extras[5].nome == e.nome) {
-                            return
-                        }
-                    } if (spedido.extras[6]) {
-                        if (spedido.extras[6].nome == e.nome) {
-                            return
-                        }
-                    } if (spedido.extras[7]) {
-                        if (spedido.extras[7].nome == e.nome) {
-                            return
-                        }
-                    } if (spedido.extras[8]) {
-                        if (spedido.extras[8].nome == e.nome) {
-                            return
-                        }
+                        </>)
                     }
-                    return (<><p><ItemPedido post={e} className={styles.wrapper} /></p></>)
-                }
-            })}
+                })
+            }
+            Extras
+            {
+                spedido.extras.map((e, index) => {
+                    return (
+                        <button onClick={() => { apaga("extras", index, e.add) }}>{e.nome}</button>
+                    )
+                })
+            }
+            {
+                dados.extras.map((e) => {
+                    if (testextras < 8) {
+                        if (spedido.extras[0]) {
+                            if (spedido.extras[0].nome == e.nome) {
+                                return
+                            }
+                        } if (spedido.extras[1]) {
+                            if (spedido.extras[1].nome == e.nome) {
+                                return
+                            }
+                        } if (spedido.extras[2]) {
+                            if (spedido.extras[2].nome == e.nome) {
+                                return
+                            }
+                        } if (spedido.extras[3]) {
+                            if (spedido.extras[3].nome == e.nome) {
+                                return
+                            }
+                        } if (spedido.extras[4]) {
+                            if (spedido.extras[4].nome == e.nome) {
+                                return
+                            }
+                        } if (spedido.extras[5]) {
+                            if (spedido.extras[5].nome == e.nome) {
+                                return
+                            }
+                        } if (spedido.extras[6]) {
+                            if (spedido.extras[6].nome == e.nome) {
+                                return
+                            }
+                        } if (spedido.extras[7]) {
+                            if (spedido.extras[7].nome == e.nome) {
+                                return
+                            }
+                        } if (spedido.extras[8]) {
+                            if (spedido.extras[8].nome == e.nome) {
+                                return
+                            }
+                        }
+                        return (
+                            <>
+                                <p onClick={(v) => { v.preventDefault(), vai('extras', e, e.add) }}>
+                                    <ItemPedido post={e} className={styles.wrapper} valor={true} />
+                                </p>
+                            </>
+                        )
+                    } else {
+                        if (spedido.extras[0]) {
+                            if (spedido.extras[0].nome == e.nome) {
+                                return
+                            }
+                        } if (spedido.extras[1]) {
+                            if (spedido.extras[1].nome == e.nome) {
+                                return
+                            }
+                        } if (spedido.extras[2]) {
+                            if (spedido.extras[2].nome == e.nome) {
+                                return
+                            }
+                        } if (spedido.extras[3]) {
+                            if (spedido.extras[3].nome == e.nome) {
+                                return
+                            }
+                        } if (spedido.extras[4]) {
+                            if (spedido.extras[4].nome == e.nome) {
+                                return
+                            }
+                        } if (spedido.extras[5]) {
+                            if (spedido.extras[5].nome == e.nome) {
+                                return
+                            }
+                        } if (spedido.extras[6]) {
+                            if (spedido.extras[6].nome == e.nome) {
+                                return
+                            }
+                        } if (spedido.extras[7]) {
+                            if (spedido.extras[7].nome == e.nome) {
+                                return
+                            }
+                        } if (spedido.extras[8]) {
+                            if (spedido.extras[8].nome == e.nome) {
+                                return
+                            }
+                        }
+                        return (<><p><ItemPedido post={e} className={styles.wrapper} /></p></>)
+                    }
+                })
+            }
             <form onSubmit={onSubmit}>
                 <Container className={styles.column}>
                     <h1>R$ {spedido.valor} + <small>taxa de entrega</small></h1>

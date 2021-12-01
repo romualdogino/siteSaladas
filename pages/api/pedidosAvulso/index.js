@@ -11,7 +11,7 @@ handler.get(async (req, res) => {
     req.db,
     req.query.before ? new Date(req.query.before) : undefined,
     req.query.by,
-    req.query.limit ? parseInt(req.query.limit, 100) : undefined
+    req.query.limit ? parseInt(req.query.limit, 10) : undefined
   );
   res.json({ posts });
 });

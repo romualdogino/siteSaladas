@@ -58,7 +58,7 @@ async function createIndexes(db) {
       .createIndexes([{ key: { createdAt: -1 } }, { key: { creatorId: -1 } }]),
       db
       .collection('pedidosAvulsos')
-      .createIndexes([{ key: { createdAt: -1 } }, { key: { creatorId: -1 } }])
+      .createIndexes([{ key: { createdAt: -1 } }])
   ]);
   indexesCreated = true;
 }

@@ -58,7 +58,7 @@ const Pedido = ({ post, className }) => {
   }, [post.createdAt]);
   return (
     <div className={clsx(styles.root, className)}>
-      <Link href={`/user/${post.creator.username}`}>
+      {post.creator ? <Link href={`/user/${post.creator.username}`}>
         <a>
           <Container className={styles.creator}>
             <Avatar
@@ -72,7 +72,8 @@ const Pedido = ({ post, className }) => {
             </Container>
           </Container>
         </a>
-      </Link>
+      </Link> : ""}
+
       <div className={styles.wrap}>
         <p className={styles.content}>
           <small>cliente: </small>
