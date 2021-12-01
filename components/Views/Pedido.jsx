@@ -58,7 +58,7 @@ const Pedido = ({ post, className }) => {
   }, [post.createdAt]);
   return (
     <div className={clsx(styles.root, className)}>
-      {post.creator ?
+      {post.creator ? (
         <Link href={`/user/${post.creator.username}`}>
           <a>
             <Container className={styles.creator}>
@@ -74,8 +74,9 @@ const Pedido = ({ post, className }) => {
             </Container>
           </a>
         </Link>
-        :
-        ""}
+      ) : (
+        ''
+      )}
 
       <div className={styles.wrap}>
         <p className={styles.content}>

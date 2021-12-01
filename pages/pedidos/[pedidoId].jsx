@@ -36,19 +36,19 @@ export async function getServerSideProps(context) {
   )
     .then((post) => {
       if (post.pedidosAvulsos2) {
-        return post = post.pedidosAvulsos2;
+        return (post = post.pedidosAvulsos2)
       } else {
         return post;
       }
     })
-    .catch((err) => console.log(err))
+    .catch((err) => console.log(err));
   if (!post) {
     return {
       notFound: true,
     };
   }
   post._id = String(post._id);
-  post.creatorId ? post.creatorId = String(post.creatorId) : "";
+  post.creatorId ? (post.creatorId = String(post.creatorId)) : "";
   if (post.creator) {
     post.creator._id = String(post.creator._id);
   }
