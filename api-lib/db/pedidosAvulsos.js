@@ -1,6 +1,28 @@
 import { ObjectId } from 'mongodb';
 import { dbProjectionUsers } from './user';
 
+export async function alteraPedidoTaxa(db, id, data) {
+  // console.log(db)
+ 
+  const post = await db
+    .collection('pedidosAvulsos')
+    .findOneAndUpdate(
+      { _id: new ObjectId(id) },
+      { $set: data },
+      { returnDocument: 'after' }
+    ).then(updatedDocument => {
+      if (updatedDocument) {
+        console.log(`Successfully updated document: ${updatedDocument}.`)
+      } else {
+        console.log("No document matches the provided query.")
+      }
+      return updatedDocument
+    })
+    .catch(err => console.error(`Failed to find and update document: ${err}`))
+  // console.log(post.value)
+  return post.value
+}
+
 export async function findPedidoAvulsoById(db, id) {
 
   const pedidosAvulsos = await db
@@ -21,10 +43,10 @@ export async function findPedidoAvulsoById(db, id) {
     ])
     .toArray();
 
-  console.log(pedidosAvulsos)
+  // console.log(pedidosAvulsos)
   if (!pedidosAvulsos[0]) {
     const pedidosAvulsos2 = await db.collection('pedidosAvulsos').findOne({ _id: new ObjectId(id) })
-    console.log({'sem':pedidosAvulsos2})
+    // console.log({ 'sem': pedidosAvulsos2 })
     return {
       pedidosAvulsos2
     }
@@ -36,7 +58,9 @@ export async function findPedidosAvulsos(db, before, by, limit = 100) {
   return db
     .collection('pedidosAvulsos')
     .find()
+    .sort( { createdAt: -1 } )
     .toArray()
+    
   // .aggregate([
   //   {
   //     $match: {
@@ -59,6 +83,27 @@ export async function findPedidosAvulsos(db, before, by, limit = 100) {
   // ])
   // .toArray();
 }
+export async function findPedidosAvulsosUser(db, before, by, limit = 10) {
+  const posts = await db
+    .collection('pedidosAvulsos')
+    .aggregate([
+      { $match: { _id: new ObjectId(id) } },
+      { $limit: 1 },
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'creatorId',
+          foreignField: '_id',
+          as: 'creator',
+        },
+      },
+      { $unwind: '$creator' },
+      { $project: dbProjectionUsers('creator.') },
+    ])
+    .toArray();
+  if (!posts[0]) return null;
+  return posts[0];
+}
 
 export async function insertPedidoAvulso(db, {
   valor,
@@ -77,8 +122,7 @@ export async function insertPedidoAvulso(db, {
   molhos,
   extras,
   ativo,
-  hora,
-  // creatorId,
+  creatorId,
 
 }) {
   const pedidosAvulsos = {
@@ -98,8 +142,7 @@ export async function insertPedidoAvulso(db, {
     molhos,
     extras,
     ativo,
-    hora,
-    // creatorId,
+    creatorId,
     createdAt: new Date(),
   };
   const { insertedId } = await db.collection('pedidosAvulsos').insertOne(pedidosAvulsos);

@@ -95,7 +95,7 @@ const UserMenu = ({ user, mutate }) => {
 };
 
 const Nav = () => {
-  const { data: { user } = {}, mutate } = useCurrentUser();
+  const { data: { user, admin } = {}, mutate } = useCurrentUser();
 
   return (
     <nav className={styles.nav}>
@@ -115,6 +115,23 @@ const Nav = () => {
               />
             </a>
           </Link>
+          {/* {console.log(user)} */}
+          {admin ? (
+            <Link href="/admin">
+              <a className={styles}>
+                <ButtonLink
+                  size="small"
+                  type="success"
+                  variant="ghost"
+                  color="link"
+                >
+                  ADMINISTRAÇÃO
+                </ButtonLink>
+              </a>
+            </Link>
+          ) : (
+            ''
+          )}
           <Container>
             {user ? (
               <>

@@ -35,8 +35,7 @@ const Grupo = ({ post, className }) => {
           descricao: descricaoTipo.current.value,
         }),
       })
-        .then((req) => {
-          console.log(req);
+        .then(() => {
           Router.reload(window.location.pathname);
         })
         .catch((err) => console.error(err));

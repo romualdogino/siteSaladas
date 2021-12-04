@@ -28,7 +28,7 @@ handler.use(database, ...auths);
 
 handler.get(async (req, res) => {
   if (!req.user) return res.json({ user: null });
-  return res.json({ user: req.user });
+  return res.json({ user: req.user, admin: req.user.admin });
 });
 
 handler.patch(

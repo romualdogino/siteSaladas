@@ -1,4 +1,4 @@
-import { Button } from '@/components/Button';
+// import { Button } from '@/components/Button';
 import { Container, Spacer } from '@/components/Layout';
 import Wrapper from '@/components/Layout/Wrapper';
 import { Text } from '@/components/Text';
@@ -6,6 +6,7 @@ import { Pedido } from '@/components/Pedido';
 import { usePedidosAvulsoPages } from '@/lib/pedidosAvulso';
 import Link from 'next/link';
 import styles from './admin.module.css';
+import { Button } from '@/components/Button';
 
 const PedidoList = () => {
   const { data, size, setSize, isLoadingMore, isReachingEnd } = usePedidosAvulsoPages();
@@ -17,15 +18,17 @@ const PedidoList = () => {
       <Spacer axis="vertical" size={1} />
       <Wrapper>
         {posts.map((post) => (
-          
+
           <Link
             key={post._id}
             href={`/pedidos/${post._id}`}
             passHref
           >
-            <div className={styles.wrap}>
-              <Pedido className={styles.post} post={post} />
-            </div>
+            <a target="_blank">
+              <div className={styles.wrap}>
+                <Pedido className={styles.post} post={post} />
+              </div>
+            </a>
           </Link>
         ))}
         <Container justifyContent="center">

@@ -4,11 +4,12 @@ import Wrapper from '@/components/Layout/Wrapper';
 import { Post } from '@/components/Views';
 import { Text } from '@/components/Text';
 import { usePostPages } from '@/lib/post';
+import { usePedidosAvulsoPagesUser } from '@/lib/pedidosAvulso';
 import Link from 'next/link';
 import styles from './UserPosts.module.css';
 
 const UserPosts = ({ user }) => {
-  const { data, size, setSize, isLoadingMore, isReachingEnd } = usePostPages({
+  const { data, size, setSize, isLoadingMore, isReachingEnd } = usePedidosAvulsoPagesUser({
     creatorId: user._id,
   });
   const posts = data

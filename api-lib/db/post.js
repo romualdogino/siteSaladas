@@ -23,6 +23,7 @@ export async function findPostById(db, id) {
   return posts[0];
 }
 
+
 export async function findPosts(db, before, by, limit = 10) {
   return db
     .collection('posts')

@@ -7,8 +7,8 @@ import { usePedidosItensAvulsosPages } from '@/lib/pedidosItensAvulsos';
 
 import styles from './admin.module.css';
 const alteraExistencia = (id)=>{
-  console.log("okkk")
-  console.log(id)
+  // console.log("okkk")
+  // console.log(id)
 }
 
 const PedidoItemAvulsoList = () => {

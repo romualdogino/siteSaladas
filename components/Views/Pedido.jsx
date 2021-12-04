@@ -9,16 +9,24 @@ import { Container } from '../Layout';
 import { Avatar } from '../Avatar';
 import { fetcher } from '@/lib/fetch';
 import toast from 'react-hot-toast';
-import { Router } from 'next/router';
+import { useRouter } from 'next/router';
+import { useCurrentUser } from '@/lib/user';
+import { useReactToPrint } from 'react-to-print';
 
 const Pedido = ({ post, className }) => {
-  const nomeTipo = useRef();
-  const descricaoTipo = useRef();
+  const componentRef = useRef(null);
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
+  const router = useRouter();
+  const taxaEntregaInput = useRef();
+  const { data: { admin } = {} } = useCurrentUser();
   const [isLoading, setIsLoading] = useState(false);
-  const onSubmit = useCallback(async (e) => {
+  const onSubmitTaxa = useCallback(async (e) => {
     e.preventDefault();
+    // console.log(taxaEntregaInput.current.value)
     try {
-      await fetcher(`/api/grupos?id=${post._id}`, {
+      await fetcher(`/api/pedidos?id=${post._id}`, {
         method: 'PATCH',
         crossDomain: true,
         xhrFields: {
@@ -31,24 +39,22 @@ const Pedido = ({ post, className }) => {
           Authorization: '',
         },
         body: JSON.stringify({
-          nome: nomeTipo.current.value,
-          descricao: descricaoTipo.current.value,
+          taxaEntrega: taxaEntregaInput.current.value,
+          status: 'Aprovado',
+          total:
+            parseFloat(taxaEntregaInput.current.value) + parseFloat(post.valor),
         }),
-      })
-        .then((req) => {
-          console.log(req);
-          Router.reload(window.location.pathname);
-        })
-        .catch((err) => console.error(err));
-      toast.success('sucesso ao add um novo grupo');
-      nomeTipo.current.value = '';
-      descricaoTipo.current.value = '';
-      //refresh post lists
+      }).then((res) => {
+        const post = res.post;
+        router.reload(window.location.pathname);
+        return { post };
+      });
+      // satatus aprovado _primeiro apos definição do frete
+      toast.success('Pedido Aceito');
     } catch (error) {
       toast.error(error.message);
     } finally {
       setIsLoading(false);
-      console.log('OK');
     }
   });
   const timestampTxt = useMemo(() => {
@@ -77,8 +83,27 @@ const Pedido = ({ post, className }) => {
       ) : (
         ''
       )}
-
-      <div className={styles.wrap}>
+      <hr />
+      {admin ? (
+        <>
+          <strong> R$ {parseFloat(post.taxaEntrega).toFixed(2)}</strong>
+          <form id="taxa" onSubmit={onSubmitTaxa}>
+            <Input
+              ref={taxaEntregaInput}
+              placeholder={post.taxaEntrega}
+              label="Taxa de Entrega __ INSERIR COM (.) .ex: 2.50 "
+            />
+            <Button type="success" loading={isLoading}>
+              Inserir Taxa de Entrega
+            </Button>
+          </form>
+        </>
+      ) : (
+        ''
+      )}
+      <hr />
+      <div className={styles.wrap} ref={componentRef}>
+        <center>{post.createdAt}</center>
         <p className={styles.content}>
           <small>cliente: </small>
           <strong>{post.nome}</strong>
@@ -103,46 +128,151 @@ const Pedido = ({ post, className }) => {
           <small>forma de pagamento: </small>
           <strong>{post.formaPagamento}</strong>
         </p>
-        <hr />
-        <div className={styles.sides}>
-          <div className={styles.left}>
-            <small>FOLHAS:</small>
+
+        <div className={styles.wrap}>
+          <p className={styles.content}>
+            <small>valor salada: </small>
+            <strong> R$ {post.valor.toFixed(2)}</strong>
+          </p>
+          <p className={styles.content}>
+            <small>Taxa de entrega: </small>
+
+            {post.status ? (
+              <strong> R$ {parseFloat(post.taxaEntrega).toFixed(2)}</strong>
+            ) : (
+              'Aguardando Aprovação'
+            )}
+          </p>
+          <p className={styles.content}>
+            <small>valor total: </small>
+            <strong> R$ {post.total.toFixed(2)}</strong>
+          </p>
+          <hr />
+          <center>{post.createdAt}</center>
+          <p className={styles.content}>
+            <small>cliente: </small>
+            <strong>{post.nome}</strong>
+          </p>
+          <div className="page-break"></div>
+          <div className={styles.sides}>
+            <div className={styles.left}>
+              <small>FOLHAS:</small>
+            </div>
+            <div className={styles.right}>
+              {post.folhas.map((e) => {
+                return (
+                  <p key={e.nome + 'TE'}>
+                    <strong>{e.nome}</strong>
+                  </p>
+                );
+              })}
+            </div>
           </div>
-          <div className={styles.right}>
-            {post.folhas.map((e) => {
-              return (
-                <p key={e.nome + 'TE'}>
-                  <strong>{e.nome}</strong>
-                </p>
-              );
-            })}
+          <div className={styles.sides}>
+            <div className={styles.left}>
+              <small>INGREDIENTES:</small>
+            </div>
+            <div className={styles.right}>
+              {post.ingredientes.map((e) => {
+                return (
+                  <p key={e.nome + 'TE'}>
+                    <strong>{e.nome}</strong>
+                  </p>
+                );
+              })}
+            </div>
+          </div>
+          <div className={styles.sides}>
+            <div className={styles.left}>
+              <small>FRUTAS:</small>
+            </div>
+            <div className={styles.right}>
+              {post.frutas.map((e) => {
+                return (
+                  <p key={e.nome + 'TE'}>
+                    <strong>{e.nome}</strong>
+                  </p>
+                );
+              })}
+            </div>
+          </div>
+          <div className={styles.sides}>
+            <div className={styles.left}>
+              <small>PROTEINAS:</small>
+            </div>
+            <div className={styles.right}>
+              {post.proteinas.map((e) => {
+                return (
+                  <p key={e.nome + 'TE'}>
+                    <strong>{e.nome}</strong>
+                  </p>
+                );
+              })}
+            </div>
+          </div>
+          <div className={styles.sides}>
+            <div className={styles.left}>
+              <small>FIBRAS:</small>
+            </div>
+            <div className={styles.right}>
+              {post.fibras.map((e) => {
+                return (
+                  <p key={e.nome + 'TE'}>
+                    <strong>{e.nome}</strong>
+                  </p>
+                );
+              })}
+            </div>
+          </div>
+          <div className={styles.sides}>
+            <div className={styles.left}>
+              <small>MOLHOS:</small>
+            </div>
+            <div className={styles.right}>
+              {post.molhos.map((e) => {
+                return (
+                  <p key={e.nome + 'TE'}>
+                    <strong>
+                      {e.add ? ' R$ ' + e.add.toFixed(2) + ' __ ' : ''}
+                    </strong>
+                    <strong>{e.nome}</strong>
+                  </p>
+                );
+              })}
+            </div>
+          </div>
+          <div className={styles.sides}>
+            <div className={styles.left}>
+              <small>EXTRAS:</small>
+            </div>
+            <div className={styles.right}>
+              {post.extras.map((e) => {
+                return (
+                  <p key={e.nome + 'TE'}>
+                    <strong> R$ {e.add.toFixed(2)} __ </strong>
+                    <strong>{e.nome}</strong>
+                  </p>
+                );
+              })}
+            </div>
           </div>
         </div>
-
         <hr />
       </div>
       <div className={styles.wrap}>
         <time dateTime={post.createdAt} className={styles.timestamp}>
           {timestampTxt} - {post.createdAt}
         </time>
+        {post.status ? (
+          <div>
+            <Button onClick={handlePrint} type="success" loading={isLoading}>
+              Imprimir Pedido
+            </Button>
+          </div>
+        ) : (
+          ''
+        )}
       </div>
-      <form onSubmit={onSubmit}>
-        <Input
-          label="nome"
-          type="text"
-          ref={nomeTipo}
-          placeholder={post.nome}
-        />
-        <Input
-          label="descrição"
-          type="text"
-          ref={descricaoTipo}
-          placeholder={post.descricao}
-        />
-        <Button type="success" loading={isLoading}>
-          Alterar
-        </Button>
-      </form>
     </div>
   );
 };

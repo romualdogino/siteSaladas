@@ -6,8 +6,8 @@ export async function alteraGrupo(db, { nome, descricao }, id) {
     descricao
   };
 
-  console.log('bodyDb')
-  console.log(bodyDb)
+  // console.log('bodyDb')
+  // console.log(bodyDb)
   const Grupos = await db
     .collection('grupos')
     .updateOne(

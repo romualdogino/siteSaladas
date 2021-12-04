@@ -23,7 +23,7 @@ export const PedidosAvulsos = () => {
       {data?.user ? (
         <>
         <Link href="/admin">Admin</Link>
-          <PedidoAdd />
+          {/* <PedidoAdd /> */}
           <PedidoList />
         </>
       ) : null}

@@ -44,6 +44,10 @@
 .wrap {
   margin-top: 16px;
 }
+.red {
+  background-color: rgba(221, 35, 35, 0.507);
+  color: aliceblue;
+}
 
 .content {
   color: var(--accents-6);

@@ -36,9 +36,8 @@ const TipoStatus = ({ post, className }) => {
           descricao: descricaoGrupo.current.value,
         }),
       })
-        .then((req) => {
+        .then(() => {
           Router.reload(window.location.pathname);
-          console.log(req);
         })
         .catch((err) => console.error(err));
       toast.success('sucesso ao add um novo grupo');

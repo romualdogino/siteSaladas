@@ -10,6 +10,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { fetcher } from '@/lib/fetch';
 import toast from 'react-hot-toast';
 import Textarea from '@/components/Input/Textarea';
+import { useRouter } from 'next/router';
 
 
 export const Pedidos = () => {
@@ -39,7 +40,6 @@ export const Pedidos = () => {
         molhos: [],
         extras: []
     }
-
 
     posts.map(e => {
         // console.log(e)
@@ -88,7 +88,7 @@ export const Pedidos = () => {
             setSpedido((spedido) => ({ ...spedido, fibras: [...spedido.fibras, { nome: nome.nome }] }))
         }
         if (tipo == 'molhos') {
-            setSpedido((spedido) => ({ ...spedido, molhos: [...spedido.molhos, { nome: nome.nome, add: parseFloat(nome.add) }] }))
+            setSpedido((spedido) => ({ ...spedido, molhos: [...spedido.molhos, { nome: nome.nome, add: valor ? parseFloat(nome.add) : '' }] }))
             if (valor) {
                 // console.log(parseFloat(valor))
                 setSpedido(spedido => ({ ...spedido, valor: spedido.valor + parseFloat(valor) }))
@@ -169,7 +169,7 @@ export const Pedidos = () => {
                 obs: obsPedido.current.value,
                 formaPagamento: formaPagamentoPedido.current.value
             }
-            console.log(meuPedido)
+            // console.log(meuPedido)
             setSpedido(spedido => ({
                 ...spedido,
                 nome: nomePedido.current.value,
@@ -185,7 +185,9 @@ export const Pedidos = () => {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(meuPedido),
-                    });
+                    }).then((r) => {
+                        location.replace(`/pedidos/${r.post._id}`);
+                    })
                     toast.success('sucesso ao solicitar seu pedido');
                     // nomeGru.current.value = '';
                     // descricaoGru.current.value = '';

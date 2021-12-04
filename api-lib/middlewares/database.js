@@ -75,7 +75,7 @@ export async function getMongoClient() {
 }
 
 export default async function database(req, res, next) {
-  console.log(req.db)
+  // console.log(req.db)
   if (!global.mongo.client) {
     global.mongo.client = new MongoClient(process.env.MONGODB_URI);
   }

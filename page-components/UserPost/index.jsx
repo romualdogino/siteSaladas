@@ -15,3 +15,5 @@ export const UserPost = ({ post }) => {
     </Wrapper>
   );
 };
+
+

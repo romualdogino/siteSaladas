@@ -5,7 +5,7 @@ const PedidosAvulsos = () => {
   return (
     <>
       <Head>
-        <title>Adiministração</title>
+        <title>Administração</title>
       </Head>
       <Pedidos />
     </>
