@@ -142,6 +142,7 @@ export async function insertPedidoAvulso(db, {
     molhos,
     extras,
     ativo,
+    total: valor,
     creatorId,
     createdAt: new Date(),
   };

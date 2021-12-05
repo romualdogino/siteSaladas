@@ -145,7 +145,7 @@ const Pedido = ({ post, className }) => {
           </p>
           <p className={styles.content}>
             <small>valor total: </small>
-            <strong> R$ {post.total.toFixed(2)}</strong>
+            <strong> R$ {parseFloat(post.total).toFixed(2)}</strong>
           </p>
           <hr />
           <center>{post.createdAt}</center>

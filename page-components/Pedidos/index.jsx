@@ -12,7 +12,6 @@ import toast from 'react-hot-toast';
 import Textarea from '@/components/Input/Textarea';
 import { useRouter } from 'next/router';
 
-
 export const Pedidos = () => {
     const pedido = {
         taxaEntrega: 0,
@@ -186,13 +185,10 @@ export const Pedidos = () => {
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(meuPedido),
                     }).then((r) => {
+
                         location.replace(`/pedidos/${r.post._id}`);
                     })
                     toast.success('sucesso ao solicitar seu pedido');
-                    // nomeGru.current.value = '';
-                    // descricaoGru.current.value = '';
-                    // refresh post lists
-                    // mutate();
                     nomePedido.current.value = ''
                 } catch (error) {
                     toast.error(error.message)
@@ -237,8 +233,11 @@ export const Pedidos = () => {
                                 return
                             }
                         }
-                        return (<><p onClick={(v) => { v.preventDefault(), vai('folhas', e) }}>
-                            <ItemPedido post={e} className={styles.wrapper} /></p></>)
+                        return (
+                            <p onClick={(v) => { v.preventDefault(), vai('folhas', e) }}>
+                                <ItemPedido post={e} className={styles.wrapper} />
+                            </p>
+                        )
                     } else {
                         if (spedido.folhas[0]) {
                             if (spedido.folhas[0].nome == e.nome) {

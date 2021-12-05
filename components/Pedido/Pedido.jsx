@@ -9,6 +9,7 @@ const Pedido = ({ post, className }) => {
     if (diff < 1 * 60 * 1000) return 'Just now';
     return `${format(diff, true)} atrás`;
   }, [post.createdAt]);
+
   return (
     <div className={clsx(post.status ? styles.root : styles.red, className)}>
       <p>
